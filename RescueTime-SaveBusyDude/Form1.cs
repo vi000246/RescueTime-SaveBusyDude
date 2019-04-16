@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Automation;
 using System.Windows.Forms;
+using rescuetime_savebusydude;
 
 namespace RescueTime_SaveBusyDude
 {
@@ -76,65 +77,12 @@ namespace RescueTime_SaveBusyDude
         //定期執行method
         private void timer1_Tick(object sender, EventArgs e)
         {
-//            GetCurrentWindowTitle();//取得活動視窗
-            GetActiveProcessFileName();//取得程式名稱
-        }
-        // 會用到的 WinAPI
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetWindowText(IntPtr hWnd, StringBuilder lpsb, Int32 count);
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetForegroundWindow();
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetWindowThreadProcessId(IntPtr hWnd, out uint ProcessId);
-
-        //取得目前視窗標題
-        private void GetCurrentWindowTitle()
-        {
-//            IntPtr handle = Handle;
-//            StringBuilder WindowTitle = new StringBuilder(256);
-//            handle = GetForegroundWindow();
-//            if (GetWindowText(handle, WindowTitle, WindowTitle.Capacity))
-//            {
-//                notifyIcon1.ShowBalloonTip(900, this.Text,
-//                    WindowTitle.ToString(),
-//                    ToolTipIcon.Info);
-//            }
-        }
-
-        //取得目前視窗的process name
-        public void GetActiveProcessFileName()
-        {
-            IntPtr hwnd = GetForegroundWindow();
-            uint pid;
-            GetWindowThreadProcessId(hwnd, out pid);
-            Process p = Process.GetProcessById((int)pid);
+//          var name =  GetCurrentWindowTitle();//取得活動視窗
+            var name = WindowUtil.GetActiveProcessFileName();//取得程式名稱
             notifyIcon1.ShowBalloonTip(900, this.Text,
-                p.MainModule.FileName.ToString(),
+                name,
                 ToolTipIcon.Info);
         }
-
-        //取得當前chrome tab的URL
-        public static string GetActiveTabUrl()
-        {
-            Process[] procsChrome = Process.GetProcessesByName("chrome");
-
-            if (procsChrome.Length <= 0)
-                return null;
-
-            foreach (Process proc in procsChrome)
-            {
-                // the chrome process must have a window 
-                if (proc.MainWindowHandle == IntPtr.Zero)
-                    continue;
-
-                // to find the tabs we first need to locate something reliable - the 'New Tab' button 
-                AutomationElement root = AutomationElement.FromHandle(proc.MainWindowHandle);
-                var SearchBar = root.FindFirst(TreeScope.Descendants, new PropertyCondition(AutomationElement.NameProperty, "Address and search bar"));
-                if (SearchBar != null)
-                    return (string)SearchBar.GetCurrentPropertyValue(ValuePatternIdentifiers.ValueProperty);
-            }
-
-            return null;
-        }
+       
     }
 }
