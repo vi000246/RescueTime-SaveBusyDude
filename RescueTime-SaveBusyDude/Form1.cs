@@ -24,8 +24,6 @@ namespace RescueTime_SaveBusyDude
             //加入結束按鈕
             ToolStripItem btnClose = this.contextMenuStrip1.Items.Add("結束");
             btnClose.Click += new EventHandler(btnClose_Click);
-            ToolStripItem btnStartFocus = this.contextMenuStrip1.Items.Add("Start Focus");
-            btnStartFocus.Click += new EventHandler(btnStartFocus_Click);
             //氣泡提示popup
             notifyIcon1.ShowBalloonTip(3000, this.Text,
                 "程式已在背景執行!",
@@ -37,12 +35,6 @@ namespace RescueTime_SaveBusyDude
             Close();
         }
 
-        //專注按鈕點擊
-        void btnStartFocus_Click(object sender, EventArgs e)
-        {
-            int minute = 0;
-            CustomForm.InputBox("開始專心", "請輸入要專注的時間(分鐘):",ref minute);
-        }
         //托盤icon點擊
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {

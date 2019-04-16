@@ -13,6 +13,7 @@ namespace rescuetime_savebusydude
 {
     /// <summary>
     /// 取得視窗資訊相關邏輯
+    /// 作廢，這裡不做了
     /// </summary>
     public static class WindowUtil
     {
