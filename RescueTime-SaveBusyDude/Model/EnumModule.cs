@@ -37,6 +37,16 @@ namespace RescueTime_SaveBusyDude
             document = 5
         }
 
+        // 生產力程度
+        public enum Productivity
+        {
+            VeryDistracting,
+            Distraction,
+            Neutral,
+            Productive,
+            VeryProductive
+        }
+
 
     }
 }

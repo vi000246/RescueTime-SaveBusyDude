@@ -49,15 +49,20 @@
     <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Util\ConfigUtil.cs" />
+    <Compile Include="Model\EnumModule.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\GetWindowUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RescueTimeAPI.cs" />
+    <Compile Include="Util\InputBox.cs" />
+    <Compile Include="Util\RescueTimeAPI.cs" />
+    <Compile Include="Model\ResponseModule.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -70,11 +75,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="DeployNugetPackager\DeployLocal.bat" />
-    <None Include="DeployNugetPackager\DeployNuget.ps1" />
-    <None Include="DeployNugetPackager\DeployServer.bat" />
-    <None Include="DeployNugetPackager\IncrementVersion.bat" />
-    <None Include="DeployNugetPackager\IncrementVersion.ps1" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -93,7 +93,7 @@
     <EmbeddedResource Include="rescuetimeIco.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DeployNugetPackager\DeployNugetReadme.txt" />
+    <Folder Include="BLL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

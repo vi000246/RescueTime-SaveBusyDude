@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Automation;
 using System.Windows.Forms;
 using rescuetime_savebusydude;
+using RescueTime_SaveBusyDude.Util;
 
 namespace RescueTime_SaveBusyDude
 {
@@ -23,6 +24,8 @@ namespace RescueTime_SaveBusyDude
             //加入結束按鈕
             ToolStripItem btnClose = this.contextMenuStrip1.Items.Add("結束");
             btnClose.Click += new EventHandler(btnClose_Click);
+            ToolStripItem btnStartFocus = this.contextMenuStrip1.Items.Add("Start Focus");
+            btnStartFocus.Click += new EventHandler(btnStartFocus_Click);
             //氣泡提示popup
             notifyIcon1.ShowBalloonTip(3000, this.Text,
                 "程式已在背景執行!",
@@ -34,6 +37,12 @@ namespace RescueTime_SaveBusyDude
             Close();
         }
 
+        //專注按鈕點擊
+        void btnStartFocus_Click(object sender, EventArgs e)
+        {
+            int minute = 0;
+            CustomForm.InputBox("開始專心", "請輸入要專注的時間(分鐘):",ref minute);
+        }
         //托盤icon點擊
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -74,14 +83,21 @@ namespace RescueTime_SaveBusyDude
         }
         #endregion
 
-        //定期執行method
+        //定期執行method 用來show Alert
         private void timer1_Tick(object sender, EventArgs e)
         {
-//          var name =  GetCurrentWindowTitle();//取得活動視窗
-            var name = WindowUtil.GetActiveProcessFileName();//取得程式名稱
-            notifyIcon1.ShowBalloonTip(900, this.Text,
-                name,
-                ToolTipIcon.Info);
+         var name = WindowUtil.GetActiveProcessName();//取得程式名稱
+         if (!string.IsNullOrEmpty(name))
+         {
+             if (name == "chrome")
+             {
+                 name = WindowUtil.GetActiveTabUrl();
+             }
+
+             notifyIcon1.ShowBalloonTip(900, this.Text,
+                 name,
+                 ToolTipIcon.Info);
+         }
         }
        
     }

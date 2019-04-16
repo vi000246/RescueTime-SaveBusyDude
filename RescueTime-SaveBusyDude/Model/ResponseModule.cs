@@ -18,7 +18,7 @@ namespace RescueTime_SaveBusyDude
             public int TimeSpent { get; set; }//花費時間 單位:秒
             public string Activity { get; set; }//程式名稱
             public string Category { get; set; }//程式分類
-            public int Productivity { get; set; }//生產力程度
+            public EnumModule.Productivity Productivity { get; set; }//生產力程度
         }
     }
 }
