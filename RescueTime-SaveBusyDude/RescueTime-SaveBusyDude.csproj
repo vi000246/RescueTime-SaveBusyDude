@@ -60,7 +60,6 @@
     <Compile Include="Util\GetWindowUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\InputBox.cs" />
     <Compile Include="Util\RescueTimeAPI.cs" />
     <Compile Include="Model\ResponseModule.cs" />
     <EmbeddedResource Include="Form1.resx">
