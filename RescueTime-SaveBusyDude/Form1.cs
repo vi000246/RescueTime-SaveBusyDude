@@ -86,18 +86,17 @@ namespace RescueTime_SaveBusyDude
         //定期執行method 用來show Alert
         private void timer1_Tick(object sender, EventArgs e)
         {
-         var name = WindowUtil.GetActiveProcessName();//取得程式名稱
-         if (!string.IsNullOrEmpty(name))
-         {
-             if (name == "chrome")
-             {
-                 name = WindowUtil.GetActiveTabUrl();
-             }
-
-             notifyIcon1.ShowBalloonTip(900, this.Text,
-                 name,
-                 ToolTipIcon.Info);
-         }
+            var name = WindowUtil.GetActiveProcessName();//取得程式名稱
+            if (name == "chrome")
+            {
+                name = WindowUtil.GetActiveTabUrl();
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+//                 notifyIcon1.ShowBalloonTip(900, this.Text,
+//                     name,
+//                     ToolTipIcon.Info);
+            }
         }
        
     }

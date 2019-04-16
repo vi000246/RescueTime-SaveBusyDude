@@ -125,11 +125,20 @@ namespace rescuetime_savebusydude
             {
                 AutomationElement elm = elm1[0];
                 string vp = ((ValuePattern) elm.GetCurrentPattern(ValuePattern.Pattern)).Current.Value as string;
-                Console.WriteLine(vp);
                 return vp;
             }
 
+
             return null;
         }
+
+        public static void KillAllChrome()
+        {
+            Process[] chromeInstances = Process.GetProcessesByName("chrome");
+
+            foreach (Process p in chromeInstances)
+                p.CloseMainWindow();
+        }
+
     }
 }
