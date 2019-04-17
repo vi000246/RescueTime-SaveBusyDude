@@ -29,8 +29,7 @@ namespace RescueTime_SaveBusyDude
             notifyIcon1.ShowBalloonTip(3000, this.Text,
                 "程式已在背景執行!",
                 ToolTipIcon.Info);
-//            var address = Dns.GetHostAddresses("www.test.com")[0];
-//            new FireWall().SetupBlockRule("69.172.200.235");
+
         }
         void btnClose_Click(object sender, EventArgs e)
         {

@@ -57,7 +57,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Util\FireWall.cs" />
+    <Compile Include="Util\FileUtil.cs" />
     <Compile Include="Util\GetWindowUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
