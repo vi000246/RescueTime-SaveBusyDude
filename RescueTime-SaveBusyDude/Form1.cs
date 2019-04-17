@@ -29,6 +29,7 @@ namespace RescueTime_SaveBusyDude
             notifyIcon1.ShowBalloonTip(3000, this.Text,
                 "程式已在背景執行!",
                 ToolTipIcon.Info);
+            var res = RescueTimeAPI.GetActivityDataByHour();
 
         }
         void btnClose_Click(object sender, EventArgs e)
@@ -80,17 +81,17 @@ namespace RescueTime_SaveBusyDude
         //定期執行method 用來show Alert
         private void timer1_Tick(object sender, EventArgs e)
         {
-            var name = WindowUtil.GetActiveProcessName();//取得程式名稱
-            if (name == "chrome")
-            {
-                name = WindowUtil.GetActiveTabUrl();
-            }
-            if (!string.IsNullOrEmpty(name))
-            {
+//            var name = WindowUtil.GetActiveProcessName();//取得程式名稱
+//            if (name == "chrome")
+//            {
+//                name = WindowUtil.GetActiveTabUrl();
+//            }
+//            if (!string.IsNullOrEmpty(name))
+//            {
 //                 notifyIcon1.ShowBalloonTip(900, this.Text,
 //                     name,
 //                     ToolTipIcon.Info);
-            }
+//            }
         }
        
     }

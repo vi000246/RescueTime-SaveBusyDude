@@ -14,7 +14,7 @@ namespace RescueTime_SaveBusyDude
 
         public enum perspective
         {
-            rank = 1,
+            rank = 1,//perspective設定為rank resolution_time就會沒作用
             interval = 2,
             member = 3
         }
@@ -30,21 +30,22 @@ namespace RescueTime_SaveBusyDude
 
         public enum restrict_kind
         {
-            category = 1,
-            activity = 2,
+            category = 1,//會回傳每個category的每個interval的總花費時間
+            activity = 2,//會回傳每個activity的每個interval總花費時間
             productivity = 3,
             efficiency = 4, //only when perspective is "interval"
-            document = 5
+            document = 5,
+            overview = 6
         }
 
-        // 生產力程度
+        // 生產力程度 分成2 ~ -2五個等級
         public enum Productivity
         {
-            VeryDistracting,
-            Distraction,
-            Neutral,
-            Productive,
-            VeryProductive
+            VeryDistracting = -2,
+            Distraction = -1,
+            Neutral = 0,
+            Productive = 1,
+            VeryProductive = 2
         }
 
 
