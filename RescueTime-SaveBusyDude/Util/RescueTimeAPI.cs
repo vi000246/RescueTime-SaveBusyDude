@@ -90,10 +90,26 @@ namespace RescueTime_SaveBusyDude
             return body.InnerHtml.ToString();
         }
 
-        public static DataApiResponse GetActivityDataByHour()
+        public static List<ApiActivityResponse> GetActivityDataByHour()
         {
             var url = BuildQueryString(perspective:EnumModule.perspective.interval );
-            return GetDataFromApi<DataApiResponse>(url);
+            var rawData = GetDataFromApi<DataApiResponse>(url);
+            var destination = new List<ApiActivityResponse>(rawData.rows.Count);
+            foreach (var r in rawData.rows)
+            {
+                destination.Add(new ApiActivityResponse
+                {
+                    Date = DateTime.Parse(r[0]),
+                    TimeSpent = int.Parse(r[1]),
+                    NumberOfPeople =  int.Parse(r[2]),
+                    Activity = r[3],
+                    Category = r[4],
+                    Productivity = (EnumModule.Productivity)int.Parse(r[5])
+
+            });
+            }
+
+            return destination;
         }
 
         //依據名稱或url，找出此進程的生產力程度 用來做block
