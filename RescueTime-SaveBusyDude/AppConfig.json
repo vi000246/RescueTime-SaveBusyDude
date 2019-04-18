@@ -1,3 +1,33 @@
-{
-  "Apikey": "B63GdYWAtKu2MB9kSPScA0geYEm0QIckUzyBkCEm"
+ {
+  "apikey": "B63GdYWAtKu2MB9kSPScA0geYEm0QIckUzyBkCEm",
+  "alert": [
+    {
+      "hour": 0,
+      "minute": 0,
+      "alertType": 0,
+      "categoryName": null,
+      "periodName": null,
+      "customMessage": null,
+      "blockWhenTrigger": false,
+      "showAlertTime": "0001-01-01T00:00:00"
+    }
+  ],
+  "alertRecord": [
+    {
+      "alertName": null,
+      "alertDate": "0001-01-01T00:00:00"
+    }
+  ],
+  "focus": {
+    "isEnable": false,
+    "duration": 0,
+    "blockingMode": 0
+  },
+  "period": [
+    {
+      "periodName": null,
+      "hour_begin": 0,
+      "hour_end": 0
+    }
+  ]
 }

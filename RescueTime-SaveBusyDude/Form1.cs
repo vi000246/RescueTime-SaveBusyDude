@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using System.Windows.Automation;
 using System.Windows.Forms;
 using rescuetime_savebusydude;
-using RescueTime_SaveBusyDude.Util;
 
 namespace RescueTime_SaveBusyDude
 {
@@ -29,9 +28,8 @@ namespace RescueTime_SaveBusyDude
             notifyIcon1.ShowBalloonTip(3000, this.Text,
                 "程式已在背景執行!",
                 ToolTipIcon.Info);
-            var res = RescueTimeAPI.GetActivityDataByHour();
-
         }
+
         void btnClose_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;

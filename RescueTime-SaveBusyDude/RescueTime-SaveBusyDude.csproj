@@ -57,11 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\Alert.cs" />
-    <Compile Include="Model\ConfigFactory.cs" />
+    <Compile Include="BLL\ProcessMapping.cs" />
+    <Compile Include="Factory\ConfigFactory.cs" />
     <Compile Include="Model\IConfig.cs" />
     <Compile Include="Model\ConfigModel.cs" />
-    <Compile Include="Model\JsonBinConfig.cs" />
-    <Compile Include="Model\LocalJsonConfig.cs" />
+    <Compile Include="Factory\JsonBinConfig.cs" />
+    <Compile Include="Factory\LocalJsonConfig.cs" />
     <Compile Include="Util\ConfigUtil.cs" />
     <Compile Include="Model\EnumModule.cs" />
     <Compile Include="Form1.cs">
@@ -70,7 +71,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Util\FileUtil.cs" />
     <Compile Include="Util\GetWindowUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -19,7 +19,9 @@ namespace RescueTime_SaveBusyDude.Model
 
         public class AlertRule
         {
-            public int hour
+            private int hour = 0;
+            private int minute = 0;
+            public int Hour
             {
                 get { return hour; }
                 set
@@ -27,7 +29,7 @@ namespace RescueTime_SaveBusyDude.Model
                     hour = (value < 0) ? 0 : (value > 24) ? 24 : value;
                 }
             }
-            public int minute
+            public int Minute
             {
                 get { return minute; }
                 set
@@ -58,8 +60,10 @@ namespace RescueTime_SaveBusyDude.Model
 
         public class PeriodRule
         {
+            private int hour_begin = 0;
+            private int hour_end = 0;
             public string PeriodName { get; set; }
-            public int hour_begin
+            public int Hour_begin
             {
                 get { return hour_begin; }
                 set
@@ -67,7 +71,7 @@ namespace RescueTime_SaveBusyDude.Model
                     hour_begin = (value < 0) ? 0 : (value > 24) ? 24 : value;
                 }
             }
-            public int hour_end {
+            public int Hour_end {
                 get { return hour_end; }
                 set
                 {
