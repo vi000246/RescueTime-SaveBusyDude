@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ConfigUtilTests.cs" />
+    <Compile Include="Util\RescueTimeAPITests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

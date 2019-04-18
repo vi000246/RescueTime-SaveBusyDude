@@ -59,15 +59,17 @@ namespace RescueTime_SaveBusyDude
 
         /// <summary>
         /// FocusTime的模式
-        /// Normal只會block VeryDistracting
-        /// Intermediate會block VeryDistracting跟Distraction
-        /// Strick會block 非Productive的程式
+        /// Normal:block VeryDistracting
+        /// Intermediate:block VeryDistracting跟Distraction
+        /// Strick:block non Productive
+        /// ActivityAndCategory:block by activity、domain name or category name
         /// </summary>
         public enum BlockingMode
         {
             Normal,
             Intermediate,
-            Strick
+            Strick,
+            ActivityAndCategory
         }
 
         /// <summary>

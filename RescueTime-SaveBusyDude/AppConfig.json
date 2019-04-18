@@ -4,7 +4,7 @@
     {
       "hour": 0,
       "minute": 0,
-      "alertType": 0,
+      "alertType": "AllTime_123",
       "categoryName": null,
       "periodName": null,
       "customMessage": null,
@@ -21,7 +21,8 @@
   "focus": {
     "isEnable": false,
     "duration": 0,
-    "blockingMode": 0
+    "blockingMode": "Normal",
+    "blockingList": [] 
   },
   "period": [
     {

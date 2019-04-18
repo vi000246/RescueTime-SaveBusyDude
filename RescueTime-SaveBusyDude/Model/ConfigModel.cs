@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace RescueTime_SaveBusyDude.Model
 {
@@ -37,6 +39,8 @@ namespace RescueTime_SaveBusyDude.Model
                     minute = (value < 0) ? 0 : (value > 60) ? 60 : value;
                 }
             }
+
+            [JsonConverter(typeof(StringEnumConverter))]
             public EnumModule.AlertType AlertType { get; set; }
             public string CategoryName { get; set; }//如果AlertType是SpecificCategory，就計算此目錄的總計時間
             public string PeriodName { get; set; }//設定何時觸發?待處理
@@ -55,7 +59,14 @@ namespace RescueTime_SaveBusyDude.Model
         {
             public bool IsEnable { get; set; }
             public int Duration { get; set; }
+
+            [JsonConverter(typeof(StringEnumConverter))]
             public EnumModule.BlockingMode BlockingMode { get; set; }
+
+            /// <summary>
+            /// 只有當BlockingMode是ActivityAndCategory才有作用
+            /// </summary>
+            public List<string> blockingList { get; set; }
         }
 
         public class PeriodRule

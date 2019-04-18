@@ -7,12 +7,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using RescueTime_SaveBusyDude.Model;
 
 namespace RescueTime_SaveBusyDude
 {
     public static class RescueTimeAPI
     {
-        public const string AnalyticDataAPI_URL = "https://www.rescuetime.com/anapi/data";
+        #region private method
+        private const string AnalyticDataAPI_URL = "https://www.rescuetime.com/anapi/data";
 
         /// <summary>
         /// 
@@ -29,9 +31,11 @@ namespace RescueTime_SaveBusyDude
             EnumModule.perspective perspective = EnumModule.perspective.rank,
             EnumModule.resolution_time resolution_time = EnumModule.resolution_time.hour,
             EnumModule.restrict_kind restrict_kind = EnumModule.restrict_kind.activity,
-            string restrict_begin = "",string restrict_end = "",string restrict_thing = "",string restrict_thingy = "")
+            string restrict_begin = "",string restrict_end = "",string restrict_thing = "",string restrict_thingy = "",
+            ConfigModel.JsonConfig config = null)
         {
-            var config = ConfigUtil.GetJsonConfigData();
+            if(config ==null)
+                config = ConfigUtil.GetJsonConfigData();
 
             var queryParams = new NameValueCollection()
             {
@@ -90,13 +94,6 @@ namespace RescueTime_SaveBusyDude
             return body.InnerHtml.ToString();
         }
 
-        public static List<ApiActivityResponse> GetActivityDataByHour()
-        {
-            var url = BuildQueryString(perspective:EnumModule.perspective.interval );
-            var rawData = GetDataFromApi<DataApiResponse>(url);
-            return ConvertJsonArrayToApiActivityResponse(rawData);
-        }
-
         private static List<ApiActivityResponse> ConvertJsonArrayToApiActivityResponse(DataApiResponse rawData)
         {
             var destination = new List<ApiActivityResponse>(rawData.rows.Count);
@@ -114,6 +111,21 @@ namespace RescueTime_SaveBusyDude
                 });
             }
             return destination;
+        }
+#endregion
+
+
+        public static List<ApiActivityResponse> GetActivityDataByHour()
+        {
+            var url = BuildQueryString(perspective: EnumModule.perspective.interval);
+            var rawData = GetDataFromApi<DataApiResponse>(url);
+            return ConvertJsonArrayToApiActivityResponse(rawData);
+        }
+
+        //判斷此程式、domain name或分類名稱存不存在,用來設置block list
+        public static bool IsActivityOrCategoryExist()
+        {
+            throw new NotImplementedException();
         }
 
         //依據名稱或url，找出此進程的生產力程度 用來做block
