@@ -94,10 +94,17 @@ namespace RescueTime_SaveBusyDude
             return body.InnerHtml.ToString();
         }
 
-        private static List<ApiActivityResponse> ConvertJsonArrayToApiActivityResponse(DataApiResponse rawData)
+        public static List<ApiActivityResponse> ConvertJsonArrayToApiActivityResponse(DataApiResponse rawData)
         {
-            var destination = new List<ApiActivityResponse>(rawData.rows.Count);
-            foreach (var r in rawData.rows)
+            return ConvertStringArrayToClass(rawData.rows);
+        }
+
+        #endregion
+
+        public static List<ApiActivityResponse> ConvertStringArrayToClass(List<List<string>> rows)
+        {
+            var destination = new List<ApiActivityResponse>(rows.Count);
+            foreach (var r in rows)
             {
                 destination.Add(new ApiActivityResponse
                 {
@@ -110,9 +117,9 @@ namespace RescueTime_SaveBusyDude
 
                 });
             }
+
             return destination;
         }
-#endregion
 
 
         public static List<ApiActivityResponse> GetActivityDataByHour()
