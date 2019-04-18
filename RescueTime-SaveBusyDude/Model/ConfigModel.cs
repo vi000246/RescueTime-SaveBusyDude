@@ -36,10 +36,11 @@ namespace RescueTime_SaveBusyDude.Model
                 }
             }
             public EnumModule.AlertType AlertType { get; set; }
-            public string CategoryName { get; set; }
-            public string PeriodName { get; set; }
+            public string CategoryName { get; set; }//如果AlertType是SpecificCategory，就計算此目錄的總計時間
+            public string PeriodName { get; set; }//設定何時觸發?待處理
             public string CustomMessage { get; set; }
-            public bool BlockWhenTrigger { get; set; }
+            public bool BlockWhenTrigger { get; set; }//當觸發alert rule時，阻擋這個AlertType
+            public DateTime ShowAlertTime { get; set; }//紀錄顯示alert的時間，防止重覆提醒
         }
 
         public class AlertRecord
