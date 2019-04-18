@@ -2,6 +2,7 @@
   "apikey": "B63GdYWAtKu2MB9kSPScA0geYEm0QIckUzyBkCEm",
   "alert": [
     {
+      "alertName": "", 
       "hour": 0,
       "minute": 0,
       "alertType": "All",

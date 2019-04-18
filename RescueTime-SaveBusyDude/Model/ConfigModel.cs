@@ -23,6 +23,8 @@ namespace RescueTime_SaveBusyDude.Model
         {
             private int hour = 0;
             private int minute = 0;
+            public string alertName { get; set; }
+
             public int Hour
             {
                 get { return hour; }
