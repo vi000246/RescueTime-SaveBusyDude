@@ -28,9 +28,10 @@ namespace RescueTime_SaveBusyDude.Model
             return _config.GetJsonConfigData();
         }
 
-        public void UpdateJsonConfigData(ConfigModel.JsonConfig newJsonObj)
+        public ConfigModel.JsonConfig UpdateJsonConfigData(ConfigModel.JsonConfig newJsonObj)
         {
             _config.UpdateJsonConfigData(newJsonObj);
+            return _config.GetJsonConfigData();
         }
     }
 }

@@ -25,6 +25,11 @@ namespace RescueTime_SaveBusyDude
             return _config.GetJsonConfigData();
         }
 
+        public static ConfigModel.JsonConfig UpdateJsonConfig(ConfigModel.JsonConfig config)
+        {
+            return _config.UpdateJsonConfigData(config);
+        }
+
         public static ConfigModel.PeriodRule GetPeriodRuleByPeriodName(ConfigModel.JsonConfig config,string periodName)
         {
             var rule = config.Period.FirstOrDefault(x => x.PeriodName == periodName);
