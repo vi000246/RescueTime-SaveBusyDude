@@ -4,9 +4,9 @@
     {
       "hour": 0,
       "minute": 0,
-      "alertType": "AllTime_123",
-      "categoryName": null,
-      "periodName": null,
+      "alertType": "AllTime",
+      "SpecificName": null,
+      "periodName": [],
       "customMessage": null,
       "blockWhenTrigger": false
     }

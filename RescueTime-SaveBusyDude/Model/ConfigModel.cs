@@ -42,8 +42,8 @@ namespace RescueTime_SaveBusyDude.Model
 
             [JsonConverter(typeof(StringEnumConverter))]
             public EnumModule.AlertType AlertType { get; set; }
-            public string CategoryName { get; set; }//如果AlertType是SpecificCategory，就計算此目錄的總計時間
-            public string PeriodName { get; set; }//設定何時觸發?待處理
+            public string SpecificName { get; set; }//如果AlertType是SpecificCategory或是SpecificActivity，就計算此目錄的總計時間
+            public string[] PeriodName { get; set; }//用來統計此period內的總計時間
             public string CustomMessage { get; set; }
             public bool BlockWhenTrigger { get; set; }//當觸發alert rule時，阻擋這個AlertType
         }
@@ -73,8 +73,6 @@ namespace RescueTime_SaveBusyDude.Model
             private int hour_begin = 0;
             private int hour_end = 0;
             public string PeriodName { get; set; }
-            public EnumModule.WeekDay[] DayofWeek { get; set; }
-
             public int Hour_begin
             {
                 get { return hour_begin; }

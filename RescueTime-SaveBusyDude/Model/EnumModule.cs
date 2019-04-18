@@ -77,25 +77,17 @@ namespace RescueTime_SaveBusyDude
         /// AllTime:總時間達到就會觸發
         /// AllProductiveTime:總專注時間達到會觸發
         /// AllDistractingTime:總分心時間達到會觸發
-        /// SpecificCategory:特定類別累積時間達到會觸發 
+        /// SpecificCategory:特定類別累積時間達到會觸發
+        /// SpecificActivity:特定程式或是domain name 
         /// </summary>
         public enum AlertType
         {
-            AllTime,
+            All,
             AllProductiveTime,
             AllDistractingTime,
-            SpecificCategory
+            SpecificCategory,
+            SpecificActivity
         }
 
-        public enum WeekDay
-        {
-            Sunday,
-            Monday,
-            Tuesday,
-            Wednesday,
-            Thursday,
-            Friday,
-            Saturday,
-        }
     }
 }
