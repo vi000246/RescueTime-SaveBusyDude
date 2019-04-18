@@ -86,5 +86,16 @@ namespace RescueTime_SaveBusyDude
             AllDistractingTime,
             SpecificCategory
         }
+
+        public enum WeekDay
+        {
+            Sunday,
+            Monday,
+            Tuesday,
+            Wednesday,
+            Thursday,
+            Friday,
+            Saturday,
+        }
     }
 }

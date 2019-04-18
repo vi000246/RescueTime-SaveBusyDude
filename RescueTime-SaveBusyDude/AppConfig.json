@@ -8,8 +8,7 @@
       "categoryName": null,
       "periodName": null,
       "customMessage": null,
-      "blockWhenTrigger": false,
-      "showAlertTime": "0001-01-01T00:00:00"
+      "blockWhenTrigger": false
     }
   ],
   "alertRecord": [
