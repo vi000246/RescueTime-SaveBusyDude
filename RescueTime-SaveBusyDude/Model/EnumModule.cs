@@ -48,6 +48,15 @@ namespace RescueTime_SaveBusyDude
             VeryProductive = 2
         }
 
+        /// <summary>
+        /// Config檔的存放位置，Local是存放在本機，JSonBin是存放在JsonBin
+        /// </summary>
+        public enum ConfigFileType
+        {
+            Local,
+            JsonBin
+        }
+
 
     }
 }

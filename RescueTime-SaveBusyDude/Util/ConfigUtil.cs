@@ -19,12 +19,7 @@ namespace RescueTime_SaveBusyDude
     {
         public static ConfigModel.JsonConfig GetJsonConfigData()
         {
-            using (StreamReader r = new StreamReader("AppConfig.json"))
-            {
-                string json = r.ReadToEnd();
-                ConfigModel.JsonConfig config = Deserialize<ConfigModel.JsonConfig>(json);
-                return config;
-            }
+            return new ConfigFactory(EnumModule.ConfigFileType.Local).GetJsonConfigData();
         }
 
         public static T Deserialize<T>(string data)
