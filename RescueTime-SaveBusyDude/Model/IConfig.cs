@@ -9,6 +9,6 @@ namespace RescueTime_SaveBusyDude.Model
     public interface IConfig
     {
         ConfigModel.JsonConfig GetJsonConfigData();
-
+        void UpdateJsonConfigData(ConfigModel.JsonConfig newJsonObj);
     }
 }

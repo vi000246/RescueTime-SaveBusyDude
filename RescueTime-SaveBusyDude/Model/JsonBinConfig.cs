@@ -12,5 +12,10 @@ namespace RescueTime_SaveBusyDude.Model
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateJsonConfigData(ConfigModel.JsonConfig newJsonObj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

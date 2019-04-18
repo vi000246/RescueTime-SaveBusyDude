@@ -17,9 +17,11 @@ namespace RescueTime_SaveBusyDude
     /// </summary>
     public static class ConfigUtil
     {
+        public static ConfigFactory _config = new ConfigFactory(EnumModule.ConfigFileType.Local);
+
         public static ConfigModel.JsonConfig GetJsonConfigData()
         {
-            return new ConfigFactory(EnumModule.ConfigFileType.Local).GetJsonConfigData();
+            return _config.GetJsonConfigData();
         }
 
         public static T Deserialize<T>(string data)
