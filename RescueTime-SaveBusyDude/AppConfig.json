@@ -4,8 +4,8 @@
     {
       "hour": 0,
       "minute": 0,
-      "alertType": "AllTime",
-      "SpecificName": null,
+      "alertType": "All",
+      "SpecificName": [],
       "periodName": [],
       "customMessage": null,
       "blockWhenTrigger": false
@@ -25,9 +25,24 @@
   },
   "period": [
     {
-      "periodName": null,
+      "periodName": "AllDay",
       "hour_begin": 0,
-      "hour_end": 0
+      "hour_end": 24
+    },
+    {
+      "periodName": "WorkDay",
+      "hour_begin": 10,
+      "hour_end": 19
+    },
+    {
+      "periodName": "OffWork_night",
+      "hour_begin": 19,
+      "hour_end": 24
+    },
+    {
+      "periodName": "OffWork_day",
+      "hour_begin": 24,
+      "hour_end": 10
     }
   ]
 }

@@ -86,7 +86,8 @@ namespace RescueTime_SaveBusyDude
             AllProductiveTime,
             AllDistractingTime,
             SpecificCategory,
-            SpecificActivity
+            SpecificActivity,
+            SpecificCategoryOrActivity
         }
 
     }

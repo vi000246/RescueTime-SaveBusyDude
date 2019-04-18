@@ -102,12 +102,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="rescuetimeIco.ico" />
+    <EmbeddedResource Include="Source\rescuetimeIco.ico" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

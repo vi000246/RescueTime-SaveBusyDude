@@ -3825,6 +3825,11 @@ namespace RescueTime_SaveBusyDude.BLL.Tests
         {
             List<ApiActivityResponse> MockData = RescueTimeAPI.ConvertStringArrayToClass(jsonString);
             ConfigModel.AlertRule alertRule = new ConfigModel.AlertRule();
+            alertRule.Hour = 1;
+            alertRule.Minute = 0;
+            alertRule.AlertType = EnumModule.AlertType.AllDistractingTime;
+            alertRule.SpecificName = new string[] {"github.com"};
+            alertRule.PeriodName = new String[] { "OffWork_night", "OffWork_day" };
             bool result = new Alert().CheckTimeSpendIsExceedByAlertTypeAndPeriod(alertRule,MockData);
             Assert.IsInstanceOfType(result,typeof(Boolean));
         }

@@ -16,14 +16,15 @@ namespace RescueTime_SaveBusyDude.BLL
         /// <param name="alertRule"></param>
         /// <param name="data"></param>
         /// <returns>如果累計時間超過alertRule指定的時間，就回傳true</returns>
-        public bool CheckTimeSpendIsExceedByAlertTypeAndPeriod(ConfigModel.AlertRule alertRule, List<ApiActivityResponse> data)
+        public bool CheckTimeSpendIsExceedByAlertTypeAndPeriod(ConfigModel.AlertRule alertRule, List<ApiActivityResponse> data,ConfigModel.JsonConfig config = null)
         {
             bool result = false;
-            var config = ConfigUtil.GetJsonConfigData();
+            if(config == null)
+                config = ConfigUtil.GetJsonConfigData();
             //取得Period by period name
             List<ConfigModel.PeriodRule> periodList = alertRule.PeriodName.Select(x=>ConfigUtil.GetPeriodRuleByPeriodName(config,x)).ToList();
 
-            //依照period，取得總花費時間
+            //Func<> 用在where條件，依照period，取得總花費時間
             Func<ApiActivityResponse, bool> FilterDataByPeriod = (ApiActivityResponse x) =>
             {
                 bool filterResult = false;
@@ -32,7 +33,8 @@ namespace RescueTime_SaveBusyDude.BLL
 
                 foreach (var period in periodList)
                 {
-                    if (period.Hour_begin <= x.Date.Hour|| x.Date.Hour <= period.Hour_end)
+                    //p.s. 這裡的hour_end判斷是用小於，沒有等於
+                    if (period.Hour_begin <= x.Date.Hour|| x.Date.Hour < period.Hour_end)
                     {
                         filterResult = true;
                     }
@@ -44,9 +46,22 @@ namespace RescueTime_SaveBusyDude.BLL
             switch (alertRule.AlertType)
             {
                 case EnumModule.AlertType.SpecificCategory:
+                    data = data
+                        .Where(x => alertRule.SpecificName.Contains(x.Category, StringComparer.OrdinalIgnoreCase)&&
+                                    FilterDataByPeriod(x))
+                        .ToList();
+                    break;
                 case EnumModule.AlertType.SpecificActivity:
                     data = data
-                        .Where(x => (x.Category == alertRule.SpecificName || x.Activity == alertRule.SpecificName) && FilterDataByPeriod(x))
+                        .Where(x => alertRule.SpecificName.Contains(x.Activity, StringComparer.OrdinalIgnoreCase) &&
+                                    FilterDataByPeriod(x))
+                        .ToList();
+                    break;
+                case EnumModule.AlertType.SpecificCategoryOrActivity:
+                    data = data
+                        .Where(x => (alertRule.SpecificName.Contains(x.Category,StringComparer.OrdinalIgnoreCase)||
+                                     alertRule.SpecificName.Contains(x.Activity, StringComparer.OrdinalIgnoreCase)) &&
+                                    FilterDataByPeriod(x))
                         .ToList();
                     break;
                 case EnumModule.AlertType.All:

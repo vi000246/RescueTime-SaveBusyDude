@@ -122,9 +122,12 @@ namespace RescueTime_SaveBusyDude
         }
 
 
-        public static List<ApiActivityResponse> GetActivityDataByHour()
+        public static List<ApiActivityResponse> GetActivityDataByHour(DateTime? date_begin = null, DateTime? date_end = null)
         {
-            var url = BuildQueryString(perspective: EnumModule.perspective.interval);
+            string strDateBegin = date_begin.HasValue ? date_begin.Value.ToString("yyyy-mm-dd") : "";
+            string strDateEnd = date_end.HasValue ? date_end.Value.ToString("yyyy-mm-dd") : "";
+
+            var url = BuildQueryString(perspective: EnumModule.perspective.interval,restrict_begin: strDateBegin,restrict_end:strDateEnd);
             var rawData = GetDataFromApi<DataApiResponse>(url);
             return ConvertJsonArrayToApiActivityResponse(rawData);
         }
