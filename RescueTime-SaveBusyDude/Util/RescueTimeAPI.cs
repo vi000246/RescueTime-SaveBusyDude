@@ -94,6 +94,11 @@ namespace RescueTime_SaveBusyDude
         {
             var url = BuildQueryString(perspective:EnumModule.perspective.interval );
             var rawData = GetDataFromApi<DataApiResponse>(url);
+            return ConvertJsonArrayToApiActivityResponse(rawData);
+        }
+
+        private static List<ApiActivityResponse> ConvertJsonArrayToApiActivityResponse(DataApiResponse rawData)
+        {
             var destination = new List<ApiActivityResponse>(rawData.rows.Count);
             foreach (var r in rawData.rows)
             {
@@ -101,14 +106,13 @@ namespace RescueTime_SaveBusyDude
                 {
                     Date = DateTime.Parse(r[0]),
                     TimeSpent = int.Parse(r[1]),
-                    NumberOfPeople =  int.Parse(r[2]),
+                    NumberOfPeople = int.Parse(r[2]),
                     Activity = r[3],
                     Category = r[4],
                     Productivity = (EnumModule.Productivity)int.Parse(r[5])
 
-            });
+                });
             }
-
             return destination;
         }
 

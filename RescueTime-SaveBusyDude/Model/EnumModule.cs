@@ -57,6 +57,32 @@ namespace RescueTime_SaveBusyDude
             JsonBin
         }
 
+        /// <summary>
+        /// FocusTime的模式
+        /// Normal只會block VeryDistracting
+        /// Intermediate會block VeryDistracting跟Distraction
+        /// Strick會block 非Productive的程式
+        /// </summary>
+        public enum BlockingMode
+        {
+            Normal,
+            Intermediate,
+            Strick
+        }
 
+        /// <summary>
+        /// 會觸發alert的類型
+        /// AllTime:總時間達到就會觸發
+        /// AllProductiveTime:總專注時間達到會觸發
+        /// AllDistractingTime:總分心時間達到會觸發
+        /// SpecificCategory:特定類別累積時間達到會觸發 
+        /// </summary>
+        public enum AlertType
+        {
+            AllTime,
+            AllProductiveTime,
+            AllDistractingTime,
+            SpecificCategory
+        }
     }
 }
