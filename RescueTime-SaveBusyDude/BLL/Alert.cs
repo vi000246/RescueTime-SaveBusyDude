@@ -108,15 +108,23 @@ namespace RescueTime_SaveBusyDude.BLL
         {
         }
 
-        public void DisplayAlertProcess(List<ApiActivityResponse> data, ConfigModel.JsonConfig config = null)
+        public string DisplayAlertProcess(List<ApiActivityResponse> data, ConfigModel.JsonConfig config = null)
         {
+            string alertMsg = string.Empty;
             if(config == null)
                 config = ConfigUtil.GetJsonConfigData();
 
             foreach (var alertRule in config.Alert)
             {
-                
+                var IsShowAlert = CheckTimeSpendIsExceedByAlertTypeAndPeriod(alertRule,data,config);
+                if (IsShowAlert)
+                {
+                    //判斷此Alert是否已顯示過
+                    //紀錄到AlertRecord
+                }
             }
+
+            return alertMsg;
         }
 
         private bool CheckTimeBetweenTwoHour(int hour,int hour_begin,int hour_end)

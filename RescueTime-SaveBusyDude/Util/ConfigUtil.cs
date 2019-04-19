@@ -18,6 +18,7 @@ namespace RescueTime_SaveBusyDude
     /// </summary>
     public static class ConfigUtil
     {
+        //多做這一層的用意是，要改Config的儲存位置時，可以在這裡切換
         public static ConfigFactory _config = new ConfigFactory(EnumModule.ConfigFileType.Local);
 
         public static ConfigModel.JsonConfig GetJsonConfigData()
@@ -25,9 +26,39 @@ namespace RescueTime_SaveBusyDude
             return _config.GetJsonConfigData();
         }
 
-        public static ConfigModel.JsonConfig UpdateJsonConfig(ConfigModel.JsonConfig config)
+        public static void InsertUpdateApiKey(string key)
         {
-            return _config.UpdateJsonConfigData(config);
+            _config.InsertUpdateApiKey(key);
+        }
+
+        public static void InsertUpdateAlertRule(ConfigModel.AlertRule alertRule)
+        {
+            _config.InsertUpdateAlertRule(alertRule);
+        }
+
+        public static void InsertUpdateAlertRecord(ConfigModel.AlertRecord alertRecord)
+        {
+            _config.InsertUpdateAlertRecord(alertRecord);
+        }
+
+        public static void InsertUpdateFocusSetting(ConfigModel.FocusSetting setting)
+        {
+            _config.InsertUpdateFocusSetting(setting);
+        }
+
+        public static void InsertUpdatePeriodRule(ConfigModel.PeriodRule periodRule)
+        {
+            _config.InsertUpdatePeriodRule(periodRule);
+        }
+
+        public static void DeleteAlertRuleByName(string alertName)
+        {
+            _config.DeleteAlertRuleByName(alertName);
+        }
+
+        public static void DeletePeriodRuleByName(string periodName)
+        {
+            _config.DeletePeriodRuleByName(periodName);
         }
 
         public static ConfigModel.SystemSetting GetSystemSetting()
