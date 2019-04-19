@@ -104,10 +104,6 @@ namespace RescueTime_SaveBusyDude.BLL
             return result;
         }
 
-        public void AddAlertRecordToJsonConfig()
-        {
-        }
-
         public string DisplayAlertProcess(List<ApiActivityResponse> data, ConfigModel.JsonConfig config = null)
         {
             string alertMsg = string.Empty;
