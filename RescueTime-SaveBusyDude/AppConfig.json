@@ -2,14 +2,16 @@
   "apikey": "B63GdYWAtKu2MB9kSPScA0geYEm0QIckUzyBkCEm",
   "alert": [
     {
-      "alertName": "", 
+      "alertName": "",
       "hour": 0,
       "minute": 0,
       "alertType": "All",
       "SpecificName": [],
-      "periodName": [],
+      "periodName": [ "AllDay" ],
       "customMessage": null,
-      "blockWhenTrigger": false
+      "blockWhenTrigger": false,
+      "EnableDays": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ],
+      "EnablePeriodName": [ "AllDay" ] 
     }
   ],
   "alertRecord": [

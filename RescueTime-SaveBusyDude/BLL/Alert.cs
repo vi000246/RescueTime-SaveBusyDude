@@ -23,6 +23,25 @@ namespace RescueTime_SaveBusyDude.BLL
                 config = ConfigUtil.GetJsonConfigData();
             //取得Period by period name
             List<ConfigModel.PeriodRule> periodList = alertRule.PeriodName.Select(x=>ConfigUtil.GetPeriodRuleByPeriodName(config,x)).ToList();
+            //會觸發Alert的時段
+            List<ConfigModel.PeriodRule> EnableAlertPeriodList = alertRule.EnablePeriodName.Select(x => ConfigUtil.GetPeriodRuleByPeriodName(config, x)).ToList();
+
+            //判斷是否執行Alert
+            bool IsEnableAlert = false;
+            var TodayWeekDay = (EnumModule.WeekDays)((int)DateTime.Now.DayOfWeek);
+            if (alertRule.EnableDays.Contains(TodayWeekDay) )
+            {
+                foreach (var period in EnableAlertPeriodList)
+                {
+                    if (CheckTimeBetweenTwoHour(DateTime.Now.Hour, period.Hour_begin, period.Hour_end))
+                    {
+                        IsEnableAlert = true;
+                    }
+                }
+            }
+
+            if (!IsEnableAlert)
+                return false;
 
             //Func<> 用在where條件，依照period，取得總花費時間
             Func<ApiActivityResponse, bool> FilterDataByPeriod = (ApiActivityResponse x) =>
@@ -34,10 +53,7 @@ namespace RescueTime_SaveBusyDude.BLL
                 foreach (var period in periodList)
                 {
                     //p.s. 這裡的hour_end判斷是用小於，沒有等於
-                    if (period.Hour_begin <= x.Date.Hour|| x.Date.Hour < period.Hour_end)
-                    {
-                        filterResult = true;
-                    }
+                    filterResult = CheckTimeBetweenTwoHour(x.Date.Hour,period.Hour_begin,period.Hour_end);
                 }
                 return filterResult;
             };
@@ -90,6 +106,26 @@ namespace RescueTime_SaveBusyDude.BLL
 
         public void AddAlertRecordToJsonConfig()
         {
+        }
+
+        public void DisplayAlertProcess(List<ApiActivityResponse> data, ConfigModel.JsonConfig config = null)
+        {
+            if(config == null)
+                config = ConfigUtil.GetJsonConfigData();
+
+            foreach (var alertRule in config.Alert)
+            {
+                
+            }
+        }
+
+        private bool CheckTimeBetweenTwoHour(int hour,int hour_begin,int hour_end)
+        {
+            if (hour_begin <= hour || hour < hour_end)
+            {
+                return true;
+            }
+            return false;
         }
 
     }

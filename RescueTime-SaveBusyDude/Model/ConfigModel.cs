@@ -25,6 +25,7 @@ namespace RescueTime_SaveBusyDude.Model
             private int minute = 0;
             public string alertName { get; set; }
 
+            //累計時間所需達到的小時數
             public int Hour
             {
                 get { return hour; }
@@ -33,6 +34,7 @@ namespace RescueTime_SaveBusyDude.Model
                     hour = (value < 0) ? 0 : (value > 24) ? 24 : value;
                 }
             }
+            //累計時間所需達到的分鐘數
             public int Minute
             {
                 get { return minute; }
@@ -43,11 +45,14 @@ namespace RescueTime_SaveBusyDude.Model
             }
 
             [JsonConverter(typeof(StringEnumConverter))]
-            public EnumModule.AlertType AlertType { get; set; }
+            public EnumModule.AlertType AlertType { get; set; }//只計算指定的Activity或是Productivity或是category
             public string[] SpecificName { get; set; }//如果AlertType是SpecificCategory或是SpecificActivity，就計算此目錄的總計時間
-            public string[] PeriodName { get; set; }//用來統計此period內的總計時間
+            public string[] PeriodName { get; set; }//用來統計此period內的總計時間，如果為空，預設撈全部
             public string CustomMessage { get; set; }
             public bool BlockWhenTrigger { get; set; }//當觸發alert rule時，阻擋這個AlertType
+            [JsonConverter(typeof(StringEnumConverter))]
+            public List<EnumModule.WeekDays> EnableDays { get; set; }//設定alert要執行的星期
+            public string[] EnablePeriodName { get; set; }//設定alert要執行的period，如果為空，預設全時段都會觸發alert
         }
 
         public class AlertRecord
@@ -99,6 +104,13 @@ namespace RescueTime_SaveBusyDude.Model
                 }
                 return true;
             }
+        }
+
+
+        public class SystemSetting
+        {
+            public string JsonBinApiKey { get; set; }
+            public bool IsEnableLog { get; set; }
         }
     }
 }

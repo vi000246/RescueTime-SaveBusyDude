@@ -33,5 +33,11 @@ namespace RescueTime_SaveBusyDude.Model
             _config.UpdateJsonConfigData(newJsonObj);
             return _config.GetJsonConfigData();
         }
+
+        //取得本地的系統設置
+        public ConfigModel.SystemSetting GetSystemSetting()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
