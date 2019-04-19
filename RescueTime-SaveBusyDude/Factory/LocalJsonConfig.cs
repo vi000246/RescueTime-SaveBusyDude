@@ -21,21 +21,26 @@ namespace RescueTime_SaveBusyDude.Model
 
         private void RefreshConfigData()
         {
+            ConfigModel.JsonConfig config = null;
             using (StreamReader r = new StreamReader(_jsonFileName))
             {
                 string json = r.ReadToEnd();
-                ConfigModel.JsonConfig config = ConfigUtil.Deserialize<ConfigModel.JsonConfig>(json);
-                if (config != null &&
-                    (config.Alert!=null || config.AlertRecord!=null || config.Apikey!=null || config.Focus!=null ||config.Period!=null))
-                {
-                    this._config = config;
-                }
-                else
-                {
-                    //如果抓不到config 就init一個新的
-                    UpdateJsonConfigData(new ConfigModel.JsonConfig());
-                }
+                config = ConfigUtil.Deserialize<ConfigModel.JsonConfig>(json);
+            }
 
+            if (config != null &&
+                (config.Alert != null || config.AlertRecord != null || config.Apikey != null || config.Focus != null || config.Period != null))
+            {
+                this._config = config;
+            }
+            else
+            {
+                //如果抓不到config 就init一個新的
+                UpdateJsonConfigData(new ConfigModel.JsonConfig()
+                {
+                    Apikey = "",Alert = new List<ConfigModel.AlertRule>(),AlertRecord = new List<ConfigModel.AlertRecord>(),
+                    Focus = new ConfigModel.FocusSetting(),Period = new List<ConfigModel.PeriodRule>()
+                });
             }
         }
 
