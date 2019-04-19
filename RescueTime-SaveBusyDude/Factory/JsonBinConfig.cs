@@ -31,7 +31,10 @@ namespace RescueTime_SaveBusyDude.Model
         {
             return this._config;
         }
-
+        public ConfigModel.AlertRecord GetAlertRecordByName(string name)
+        {
+            throw new NotImplementedException();
+        }
         private void UpdateJsonConfigData(ConfigModel.JsonConfig newJsonObj)
         {
             throw new NotImplementedException();

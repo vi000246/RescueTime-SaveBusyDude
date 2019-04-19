@@ -49,6 +49,12 @@ namespace RescueTime_SaveBusyDude.Model
             return _config;
         }
 
+        public ConfigModel.AlertRecord GetAlertRecordByName(string name)
+        {
+            var record = _config.AlertRecord.FirstOrDefault(x => x.AlertName == name);
+            return record;
+        }
+
         private void UpdateJsonConfigData(ConfigModel.JsonConfig newJsonObj)
         {
             //validation

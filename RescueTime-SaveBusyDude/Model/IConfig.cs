@@ -9,6 +9,7 @@ namespace RescueTime_SaveBusyDude.Model
     public interface IConfig
     {
         ConfigModel.JsonConfig GetJsonConfigData();
+        ConfigModel.AlertRecord GetAlertRecordByName(string name);
         void InsertUpdateApiKey(string key);
         void InsertUpdateAlertRule(ConfigModel.AlertRule alertRule);
         void InsertUpdateAlertRecord(ConfigModel.AlertRecord alertRecord);

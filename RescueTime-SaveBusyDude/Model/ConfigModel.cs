@@ -57,6 +57,11 @@ namespace RescueTime_SaveBusyDude.Model
 
         public class AlertRecord
         {
+            public AlertRecord(string alertName,DateTime AlertDate)
+            {
+                this.AlertName = alertName;
+                this.AlertDate = AlertDate;
+            }
             public string AlertName { get; set; }
             public DateTime AlertDate { get; set; }
         }

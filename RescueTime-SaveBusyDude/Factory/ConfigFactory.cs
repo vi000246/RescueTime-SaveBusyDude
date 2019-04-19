@@ -28,6 +28,11 @@ namespace RescueTime_SaveBusyDude.Model
             return _config.GetJsonConfigData();
         }
 
+        public ConfigModel.AlertRecord GetAlertRecordByName(string name)
+        {
+            return _config.GetAlertRecordByName(name);
+        }
+
         public void InsertUpdateApiKey(string key)
         {
             _config.InsertUpdateApiKey(key);

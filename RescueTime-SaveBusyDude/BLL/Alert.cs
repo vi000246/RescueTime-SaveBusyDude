@@ -117,14 +117,53 @@ namespace RescueTime_SaveBusyDude.BLL
             foreach (var alertRule in config.Alert)
             {
                 var IsShowAlert = CheckTimeSpendIsExceedByAlertTypeAndPeriod(alertRule,data,config);
-                if (IsShowAlert)
+                var HasShowAlertToday = CheckAlertHasDisplayToday(alertRule.alertName);
+                if (IsShowAlert && !HasShowAlertToday)
                 {
-                    //判斷此Alert是否已顯示過
+                    //組回傳字串
+                    alertMsg += "\n" + BuildAlertMessage(alertRule);
                     //紀錄到AlertRecord
+                    ConfigUtil.InsertUpdateAlertRecord(new ConfigModel.AlertRecord(alertRule.alertName,DateTime.Now.Date));
                 }
             }
 
             return alertMsg;
+        }
+
+        private string BuildAlertMessage(ConfigModel.AlertRule alertRule)
+        {
+            string activitys = string.Empty;
+            switch (alertRule.AlertType)
+            {
+                case EnumModule.AlertType.All:
+                    activitys = "總使用時間";
+                    break;
+                case EnumModule.AlertType.AllDistractingTime:
+                    activitys = "總Distracting使用時間";
+                    break;
+                case EnumModule.AlertType.AllProductiveTime:
+                    activitys = "總Productive使用時間";
+                    break;
+                case EnumModule.AlertType.SpecificActivity:
+                case EnumModule.AlertType.SpecificCategory:
+                case EnumModule.AlertType.SpecificCategoryOrActivity:
+                    activitys = string.Join(",", alertRule.SpecificName);
+                    break;
+            }
+            return $"【{activitys}】\n 於 〔{alertRule.PeriodName}〕\n 已滿 {alertRule.Hour} 小時 {alertRule.Minute} 分";
+        }
+
+        private bool CheckAlertHasDisplayToday(string name)
+        {
+            var record = ConfigUtil.GetAlertRecordByName(name);
+            if (record != null && (DateTime.Now.Date - record.AlertDate).TotalDays == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private bool CheckTimeBetweenTwoHour(int hour,int hour_begin,int hour_end)
