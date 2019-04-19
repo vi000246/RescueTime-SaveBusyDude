@@ -3,7 +3,7 @@
   "alert": [
     {
       "alertName": "PTT",
-      "hour": ,
+      "hour": 0,
       "minute": 50,
       "alertType": "SpecificCategoryOrActivity",
       "SpecificName": [ "bbs" ],

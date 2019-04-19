@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="BLL\Alert.cs" />
     <Compile Include="BLL\Calculate.cs" />
+    <Compile Include="BLL\ErrorHandle.cs" />
     <Compile Include="BLL\ProcessMapping.cs" />
     <Compile Include="Factory\ConfigFactory.cs" />
     <Compile Include="Model\IConfig.cs" />
