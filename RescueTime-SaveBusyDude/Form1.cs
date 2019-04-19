@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Automation;
 using System.Windows.Forms;
 using rescuetime_savebusydude;
+using RescueTime_SaveBusyDude.BLL;
 
 namespace RescueTime_SaveBusyDude
 {
@@ -77,20 +78,18 @@ namespace RescueTime_SaveBusyDude
         #endregion
 
         //定期執行method 用來show Alert
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Alerttimer_Tick(object sender, EventArgs e)
         {
-//            var name = WindowUtil.GetActiveProcessName();//取得程式名稱
-//            if (name == "chrome")
-//            {
-//                name = WindowUtil.GetActiveTabUrl();
-//            }
-//            if (!string.IsNullOrEmpty(name))
-//            {
-//                 notifyIcon1.ShowBalloonTip(900, this.Text,
-//                     name,
-//                     ToolTipIcon.Info);
-//            }
+            var config = ConfigUtil.GetJsonConfigData();
+            var data = RescueTimeAPI.GetActivityDataByHour();
+            string msg = new Alert().DisplayAlertProcess(data,config);
+            if (!string.IsNullOrEmpty(msg))
+            {
+                //氣泡提示popup
+                notifyIcon1.ShowBalloonTip(10000, "提醒",
+                    msg,
+                    ToolTipIcon.Warning);
+            }
         }
-       
     }
 }
