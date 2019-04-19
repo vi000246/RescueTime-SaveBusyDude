@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using RescueTime_SaveBusyDude.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using RescueTime_SaveBusyDude.BLL;
 
 namespace RescueTime_SaveBusyDude
 {
@@ -23,77 +24,63 @@ namespace RescueTime_SaveBusyDude
 
         public static ConfigModel.JsonConfig GetJsonConfigData()
         {
-            return _config.GetJsonConfigData();
+            return ErrorHandle.Execute(() => _config.GetJsonConfigData());
         }
 
         public static ConfigModel.AlertRecord GetAlertRecordByName(string name)
         {
-            return _config.GetAlertRecordByName(name);
+            return ErrorHandle.Execute(() =>_config.GetAlertRecordByName(name));
         }
 
         public static void InsertUpdateApiKey(string key)
         {
-            _config.InsertUpdateApiKey(key);
+            ErrorHandle.Execute(() => _config.InsertUpdateApiKey(key));
         }
 
         public static void InsertUpdateAlertRule(ConfigModel.AlertRule alertRule)
         {
-            _config.InsertUpdateAlertRule(alertRule);
+            ErrorHandle.Execute(() => _config.InsertUpdateAlertRule(alertRule));
         }
 
         public static void InsertUpdateAlertRecord(ConfigModel.AlertRecord alertRecord)
         {
-            _config.InsertUpdateAlertRecord(alertRecord);
+            ErrorHandle.Execute(() => _config.InsertUpdateAlertRecord(alertRecord));
         }
 
         public static void InsertUpdateFocusSetting(ConfigModel.FocusSetting setting)
         {
-            _config.InsertUpdateFocusSetting(setting);
+            ErrorHandle.Execute(() => _config.InsertUpdateFocusSetting(setting));
         }
 
         public static void InsertUpdatePeriodRule(ConfigModel.PeriodRule periodRule)
         {
-            _config.InsertUpdatePeriodRule(periodRule);
+            ErrorHandle.Execute(()=>_config.InsertUpdatePeriodRule(periodRule));
         }
 
         public static void DeleteAlertRuleByName(string alertName)
         {
-            _config.DeleteAlertRuleByName(alertName);
+            ErrorHandle.Execute(()=>_config.DeleteAlertRuleByName(alertName));
         }
 
         public static void DeletePeriodRuleByName(string periodName)
         {
-            _config.DeletePeriodRuleByName(periodName);
+            ErrorHandle.Execute(()=>_config.DeletePeriodRuleByName(periodName));
         }
 
         public static ConfigModel.SystemSetting GetSystemSetting()
         {
-            return _config.GetSystemSetting();
+            return ErrorHandle.Execute(()=>_config.GetSystemSetting());
         }
 
         public static ConfigModel.PeriodRule GetPeriodRuleByPeriodName(ConfigModel.JsonConfig config,string periodName)
         {
-            var rule = config.Period.FirstOrDefault(x => x.PeriodName == periodName);
-            if (rule == null)
-            {
-                MessageBox.Show("Cannot  find period rule by period name");
-                throw new Exception("Cannot  find period rule by period name");
-            }
-            return rule;
+            return ErrorHandle.Execute(() => _config.GetPeriodRuleByPeriodName(config,periodName));
         }
 
         public static T Deserialize<T>(string data)
         {
-            T obj = default(T);
-            try
-            {
-                obj = JsonConvert.DeserializeObject<T>(data);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Cannot parse json file,please check json format. \nErrorMsg:\n"+ex.Message);
-            }
-            return obj;
+            return ErrorHandle.Execute(() => JsonConvert.DeserializeObject<T>(data),"Cannot parse json file,please check json file format.");
         }
+
     }
 }

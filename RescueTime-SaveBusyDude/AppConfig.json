@@ -2,16 +2,16 @@
   "apikey": "B63GdYWAtKu2MB9kSPScA0geYEm0QIckUzyBkCEm",
   "alert": [
     {
-      "alertName": "",
-      "hour": 0,
-      "minute": 0,
-      "alertType": "All",
-      "SpecificName": [],
+      "alertName": "PTT",
+      "hour": ,
+      "minute": 50,
+      "alertType": "SpecificCategoryOrActivity",
+      "SpecificName": [ "bbs" ],
       "periodName": [ "AllDay" ],
       "customMessage": null,
       "blockWhenTrigger": false,
       "EnableDays": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ],
-      "EnablePeriodName": [ "AllDay" ] 
+      "EnablePeriodName": [ "AllDay" ]
     }
   ],
   "alertRecord": [

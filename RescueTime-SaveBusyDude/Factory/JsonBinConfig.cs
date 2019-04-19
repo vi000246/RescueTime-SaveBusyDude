@@ -35,6 +35,12 @@ namespace RescueTime_SaveBusyDude.Model
         {
             throw new NotImplementedException();
         }
+
+        public ConfigModel.PeriodRule GetPeriodRuleByPeriodName(ConfigModel.JsonConfig config, string periodName)
+        {
+            throw new NotImplementedException();
+        }
+
         private void UpdateJsonConfigData(ConfigModel.JsonConfig newJsonObj)
         {
             throw new NotImplementedException();

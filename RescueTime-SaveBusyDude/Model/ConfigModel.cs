@@ -50,7 +50,7 @@ namespace RescueTime_SaveBusyDude.Model
             public string[] PeriodName { get; set; }//用來統計此period內的總計時間，如果為空，預設撈全部
             public string CustomMessage { get; set; }
             public bool BlockWhenTrigger { get; set; }//當觸發alert rule時，阻擋這個AlertType
-            [JsonConverter(typeof(StringEnumConverter))]
+            [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
             public List<EnumModule.WeekDays> EnableDays { get; set; }//設定alert要執行的星期
             public string[] EnablePeriodName { get; set; }//設定alert要執行的period，如果為空，預設全時段都會觸發alert
         }

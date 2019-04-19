@@ -51,7 +51,7 @@ namespace RescueTime_SaveBusyDude.Model
 
         public ConfigModel.AlertRecord GetAlertRecordByName(string name)
         {
-            var record = _config.AlertRecord.FirstOrDefault(x => x.AlertName == name);
+            var record = _config.AlertRecord.FirstOrDefault(x => x.AlertName.ToLower() == name.ToLower());
             return record;
         }
 
@@ -133,7 +133,7 @@ namespace RescueTime_SaveBusyDude.Model
             }
             else
             {
-                MessageBox.Show("找不到指定的Alert規則");
+                throw new ArgumentException("找不到指定的Alert規則");
             }
             UpdateJsonConfigData(_config);
             RefreshConfigData();
@@ -148,10 +148,18 @@ namespace RescueTime_SaveBusyDude.Model
             }
             else
             {
-                MessageBox.Show("找不到指定的Period規則");
+                throw new ArgumentException("找不到指定的Period規則");
             }
             UpdateJsonConfigData(_config);
             RefreshConfigData();
+        }
+
+        public ConfigModel.PeriodRule GetPeriodRuleByPeriodName(ConfigModel.JsonConfig config, string periodName)
+        {
+            var period =  _config.Period.FirstOrDefault(x => x.PeriodName == periodName);
+            if(period == null)
+                throw new ArgumentException("Cannot find period name.");
+            return period;
         }
     }
 }

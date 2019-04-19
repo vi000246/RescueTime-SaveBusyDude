@@ -53,6 +53,11 @@ namespace RescueTime_SaveBusyDude.Model
             _config.InsertUpdateFocusSetting(setting);
         }
 
+        public ConfigModel.PeriodRule GetPeriodRuleByPeriodName(ConfigModel.JsonConfig config, string periodName)
+        {
+            return _config.GetPeriodRuleByPeriodName(config, periodName);
+        }
+
         public void InsertUpdatePeriodRule(ConfigModel.PeriodRule periodRule)
         {
             _config.InsertUpdatePeriodRule(periodRule);
