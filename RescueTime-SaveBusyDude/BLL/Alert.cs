@@ -150,7 +150,7 @@ namespace RescueTime_SaveBusyDude.BLL
                     activitys = string.Join(",", alertRule.SpecificName);
                     break;
             }
-            return $"【{activitys}】\n於 〔{alertRule.PeriodName}〕\n已滿 {alertRule.Hour} 小時 {alertRule.Minute} 分 \n{alertRule.CustomMessage}";
+            return $"【{activitys}】\n於 〔{string.Join(",",alertRule.PeriodName)}〕\n已滿 {alertRule.Hour} 小時 {alertRule.Minute} 分 \n{alertRule.CustomMessage}";
         }
 
         private bool CheckAlertHasDisplayToday(string name)

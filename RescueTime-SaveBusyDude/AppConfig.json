@@ -7,11 +7,11 @@
       "minute": 50,
       "alertType": "SpecificCategoryOrActivity",
       "SpecificName": [ "bbs" ],
-      "periodName": [ "AllDay" ],
+      "periodName": [ "全天" ],
       "customMessage": null,
       "blockWhenTrigger": false,
       "EnableDays": [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ],
-      "EnablePeriodName": [ "AllDay" ]
+      "EnablePeriodName": [ "全天" ]
     }
   ],
   "alertRecord": [
@@ -28,22 +28,22 @@
   },
   "period": [
     {
-      "periodName": "AllDay",
+      "periodName": "全天",
       "hour_begin": 0,
       "hour_end": 24
     },
     {
-      "periodName": "WorkDay",
+      "periodName": "上班時間",
       "hour_begin": 10,
       "hour_end": 19
     },
     {
-      "periodName": "OffWork_night",
+      "periodName": "下班時間_晚上",
       "hour_begin": 19,
       "hour_end": 24
     },
     {
-      "periodName": "OffWork_day",
+      "periodName": "十二點~十點",
       "hour_begin": 24,
       "hour_end": 10
     }

@@ -22,7 +22,7 @@ namespace RescueTime_SaveBusyDude.Model
         private void RefreshConfigData()
         {
             ConfigModel.JsonConfig config = null;
-            using (StreamReader r = new StreamReader(_jsonFileName))
+            using (StreamReader r = new StreamReader(_jsonFileName, System.Text.Encoding.Default))
             {
                 string json = r.ReadToEnd();
                 config = ConfigUtil.Deserialize<ConfigModel.JsonConfig>(json);
