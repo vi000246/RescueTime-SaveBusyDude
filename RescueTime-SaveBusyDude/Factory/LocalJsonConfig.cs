@@ -25,7 +25,16 @@ namespace RescueTime_SaveBusyDude.Model
             {
                 string json = r.ReadToEnd();
                 ConfigModel.JsonConfig config = ConfigUtil.Deserialize<ConfigModel.JsonConfig>(json);
-                this._config = config;
+                if (config != null &&
+                    (config.Alert!=null || config.AlertRecord!=null || config.Apikey!=null || config.Focus!=null ||config.Period!=null))
+                {
+                    this._config = config;
+                }
+                else
+                {
+                    //如果抓不到config 就init一個新的
+                    UpdateJsonConfigData(new ConfigModel.JsonConfig());
+                }
 
             }
         }
