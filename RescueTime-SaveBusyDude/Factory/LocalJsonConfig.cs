@@ -73,7 +73,7 @@ namespace RescueTime_SaveBusyDude.Model
 
         public void InsertUpdateAlertRule(ConfigModel.AlertRule alertRule)
         {
-            var OldRuleIndex = _config.Alert.FindIndex(c => c.alertName == alertRule.alertName);
+            var OldRuleIndex = _config.Alert.FindIndex(c => c.alertName.Equals(alertRule.alertName, StringComparison.OrdinalIgnoreCase));
             if (OldRuleIndex > -1)
             {
                 _config.Alert[OldRuleIndex] = alertRule;
@@ -89,8 +89,8 @@ namespace RescueTime_SaveBusyDude.Model
         public void InsertUpdateAlertRecord(ConfigModel.AlertRecord alertRecord)
         {
 
-                var OldRuleIndex = _config.AlertRecord.FindIndex(c => c.AlertName == alertRecord.AlertName);
-                if (OldRuleIndex > -1)
+                var OldRuleIndex = _config.AlertRecord.FindIndex(c => c.AlertName.Equals(alertRecord.AlertName, StringComparison.OrdinalIgnoreCase));
+            if (OldRuleIndex > -1)
                 {
                     _config.AlertRecord[OldRuleIndex] = alertRecord;
                 }
@@ -126,7 +126,7 @@ namespace RescueTime_SaveBusyDude.Model
 
         public void DeleteAlertRuleByName(string alertName)
         {
-            var OldRuleIndex = _config.Alert.FindIndex(c => c.alertName == alertName);
+            var OldRuleIndex = _config.Alert.FindIndex(c => c.alertName.Equals(alertName, StringComparison.OrdinalIgnoreCase));
             if (OldRuleIndex > -1)
             {
                 _config.Alert.RemoveAt(OldRuleIndex);
@@ -156,8 +156,8 @@ namespace RescueTime_SaveBusyDude.Model
 
         public ConfigModel.PeriodRule GetPeriodRuleByPeriodName(ConfigModel.JsonConfig config, string periodName)
         {
-            var period =  _config.Period.FirstOrDefault(x => x.PeriodName == periodName);
-            if(period == null)
+            var period = _config.Period.FirstOrDefault(s => String.Equals(s.PeriodName, periodName, StringComparison.CurrentCultureIgnoreCase));
+            if (period == null)
                 throw new ArgumentException("Cannot find period name.");
             return period;
         }
