@@ -89,15 +89,15 @@ namespace RescueTime_SaveBusyDude.Model
         public void InsertUpdateAlertRecord(ConfigModel.AlertRecord alertRecord)
         {
 
-                var OldRuleIndex = _config.AlertRecord.FindIndex(c => c.AlertName.Equals(alertRecord.AlertName, StringComparison.OrdinalIgnoreCase));
+            var OldRuleIndex = _config.AlertRecord.FindIndex(c => c.AlertName.Equals(alertRecord.AlertName, StringComparison.OrdinalIgnoreCase));
             if (OldRuleIndex > -1)
-                {
-                    _config.AlertRecord[OldRuleIndex] = alertRecord;
-                }
-                else
-                {
-                    _config.AlertRecord.Add(alertRecord);
-                }
+            {
+                _config.AlertRecord[OldRuleIndex] = alertRecord;
+            }
+            else
+            {
+                _config.AlertRecord.Add(alertRecord);
+            }
             UpdateJsonConfigData(_config);
             RefreshConfigData();
         }
