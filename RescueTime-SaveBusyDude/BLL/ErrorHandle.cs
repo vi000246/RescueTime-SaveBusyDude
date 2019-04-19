@@ -18,9 +18,8 @@ namespace RescueTime_SaveBusyDude.BLL
             catch (Exception ex)
             {
                 showMsgBox(ex.Message, customMsg);
+                throw new ArgumentException(ex.Message);
             }
-
-            throw new Exception();
         }
 
         public static void Execute(Action func, string customMsg = null)
@@ -34,7 +33,6 @@ namespace RescueTime_SaveBusyDude.BLL
                 showMsgBox(ex.Message, customMsg);
             }
 
-            throw new Exception();
         }
 
         private static void showMsgBox(string msg, string customMsg)

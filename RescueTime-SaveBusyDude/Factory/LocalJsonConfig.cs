@@ -51,7 +51,7 @@ namespace RescueTime_SaveBusyDude.Model
 
         public ConfigModel.AlertRecord GetAlertRecordByName(string name)
         {
-            var record = _config.AlertRecord.FirstOrDefault(x => x.AlertName.ToLower() == name.ToLower());
+            var record = _config.AlertRecord.FirstOrDefault(s => String.Equals(s.AlertName, name, StringComparison.CurrentCultureIgnoreCase));
             return record;
         }
 
