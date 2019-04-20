@@ -55,7 +55,7 @@
             // AlertTimer
             // 
             this.AlertTimer.Enabled = true;
-            this.AlertTimer.Interval = 3000;
+            this.AlertTimer.Interval = 300000;
             this.AlertTimer.Tick += new System.EventHandler(this.Alerttimer_Tick);
             // 
             // Form1

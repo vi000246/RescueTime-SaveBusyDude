@@ -102,6 +102,16 @@ namespace RescueTime_SaveBusyDude.Model
             RefreshConfigData();
         }
 
+        private void DeleteAlertRecordByName(string Name) {
+            var OldRuleIndex = _config.AlertRecord.FindIndex(c => c.AlertName.Equals(Name, StringComparison.OrdinalIgnoreCase));
+            if (OldRuleIndex > -1)
+            {
+                _config.AlertRecord.RemoveAt(OldRuleIndex);
+            }
+            UpdateJsonConfigData(_config);
+            RefreshConfigData();
+        }
+
         public void InsertUpdateFocusSetting(ConfigModel.FocusSetting setting)
         {
             _config.Focus = setting;
@@ -130,10 +140,12 @@ namespace RescueTime_SaveBusyDude.Model
             if (OldRuleIndex > -1)
             {
                 _config.Alert.RemoveAt(OldRuleIndex);
+                //順便刪除alertRecord
+                DeleteAlertRecordByName(alertName);
             }
             else
             {
-                throw new ArgumentException("找不到指定的Alert規則");
+                throw new ArgumentException("Cannot find specific alert rule");
             }
             UpdateJsonConfigData(_config);
             RefreshConfigData();
@@ -148,7 +160,7 @@ namespace RescueTime_SaveBusyDude.Model
             }
             else
             {
-                throw new ArgumentException("找不到指定的Period規則");
+                throw new ArgumentException("Cannot find specific period rule");
             }
             UpdateJsonConfigData(_config);
             RefreshConfigData();

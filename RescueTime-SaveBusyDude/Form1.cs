@@ -13,6 +13,7 @@ using System.Windows.Automation;
 using System.Windows.Forms;
 using rescuetime_savebusydude;
 using RescueTime_SaveBusyDude.BLL;
+using RescueTime_SaveBusyDude.Forms;
 
 namespace RescueTime_SaveBusyDude
 {
@@ -22,30 +23,39 @@ namespace RescueTime_SaveBusyDude
         public Form1()
         {
             InitializeComponent();
+            //加入設置按鈕
+            ToolStripItem btnSetting = this.contextMenuStrip1.Items.Add("Setting");
+            btnSetting.Click += new EventHandler(btnSetting_Click);
             //加入結束按鈕
-            ToolStripItem btnClose = this.contextMenuStrip1.Items.Add("結束");
+            ToolStripItem btnClose = this.contextMenuStrip1.Items.Add("Exit");
             btnClose.Click += new EventHandler(btnClose_Click);
             //氣泡提示popup
             notifyIcon1.ShowBalloonTip(3000, this.Text,
-                "程式已在背景執行!",
+                "Process is running in the background!",
                 ToolTipIcon.Info);
         }
 
+        //離開程式
         void btnClose_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
             Close();
         }
 
+        void btnSetting_Click(object sender, EventArgs e)
+        {
+            new ConfigForm().Show();
+        }
+
         //托盤icon點擊
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ShowForm();
+            //ShowForm();
         }
         //氣泡圖示點擊
         private void notifyIcon1_BalloonTipClicked(object sender, EventArgs e)
         {
-            ShowForm();
+            //ShowForm();
         }
         /// <summary>
         /// 顯示出主畫面
@@ -71,7 +81,7 @@ namespace RescueTime_SaveBusyDude
                 this.WindowState = FormWindowState.Minimized;
                 notifyIcon1.Tag = string.Empty;
                 notifyIcon1.ShowBalloonTip(3000, this.Text,
-                    "程式並未結束，要結束請在圖示上按右鍵，選取結束功能!",
+                    "The program is not closing yet,\nif you want to exit,\nplease right click on task bar icon,then click exit.",
                     ToolTipIcon.Info);
             }
         }
@@ -86,7 +96,7 @@ namespace RescueTime_SaveBusyDude
             if (!string.IsNullOrEmpty(msg))
             {
                 //氣泡提示popup
-                notifyIcon1.ShowBalloonTip(10000, "提醒",
+                notifyIcon1.ShowBalloonTip(10000, "Alert",
                     msg,
                     ToolTipIcon.Warning);
             }

@@ -73,6 +73,8 @@ namespace RescueTime_SaveBusyDude.Model
 
         public void DeleteAlertRuleByName(string alertName)
         {
+            //also delete alertRecord
+
             throw new NotImplementedException();
         }
 
