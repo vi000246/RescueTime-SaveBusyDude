@@ -85,6 +85,7 @@
     <Compile Include="Forms\PeriodRule.Designer.cs">
       <DependentUpon>PeriodRule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ComboBoxHelper.cs" />
     <Compile Include="Model\IConfig.cs" />
     <Compile Include="Model\ConfigModel.cs" />
     <Compile Include="Factory\JsonBinConfig.cs" />
@@ -124,6 +125,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\RescueTime_SaveBusyDude.Model.ConfigModel+AlertRule.datasource" />
     <None Include="Properties\DataSources\RescueTime_SaveBusyDude.Model.ConfigModel+PeriodRule.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

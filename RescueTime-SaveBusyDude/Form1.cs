@@ -33,6 +33,8 @@ namespace RescueTime_SaveBusyDude
             notifyIcon1.ShowBalloonTip(3000, this.Text,
                 "Process is running in the background!",
                 ToolTipIcon.Info);
+
+            new ConfigForm().Show();
         }
 
         //離開程式
