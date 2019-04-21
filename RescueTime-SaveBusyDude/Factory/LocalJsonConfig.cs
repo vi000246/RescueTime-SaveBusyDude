@@ -60,7 +60,7 @@ namespace RescueTime_SaveBusyDude.Model
             //validation
             //驗證是否有重覆alertName
             var modifiedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(newJsonObj);
-            File.WriteAllText(_jsonFileName, modifiedJsonString);
+            File.WriteAllText(_jsonFileName, modifiedJsonString, Encoding.UTF8);
             RefreshConfigData();
         }
 
@@ -169,8 +169,6 @@ namespace RescueTime_SaveBusyDude.Model
         public ConfigModel.PeriodRule GetPeriodRuleByPeriodName(ConfigModel.JsonConfig config, string periodName)
         {
             var period = _config.Period.FirstOrDefault(s => String.Equals(s.PeriodName, periodName, StringComparison.CurrentCultureIgnoreCase));
-            if (period == null)
-                throw new ArgumentException("Cannot find period name.");
             return period;
         }
     }

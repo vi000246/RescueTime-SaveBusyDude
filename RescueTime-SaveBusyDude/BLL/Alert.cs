@@ -22,9 +22,9 @@ namespace RescueTime_SaveBusyDude.BLL
             if(config == null)
                 config = ConfigUtil.GetJsonConfigData();
             //取得Period by period name
-            List<ConfigModel.PeriodRule> periodList = alertRule.PeriodName.Select(x=>ConfigUtil.GetPeriodRuleByPeriodName(config,x)).ToList();
+            List<ConfigModel.PeriodRule> periodList = alertRule.PeriodName.Select(x=>ConfigUtil.GetPeriodRuleByPeriodName(x,config)).Where(x=>x != null).ToList();
             //會觸發Alert的時段
-            List<ConfigModel.PeriodRule> EnableAlertPeriodList = alertRule.EnablePeriodName.Select(x => ConfigUtil.GetPeriodRuleByPeriodName(config, x)).ToList();
+            List<ConfigModel.PeriodRule> EnableAlertPeriodList = alertRule.EnablePeriodName.Select(x => ConfigUtil.GetPeriodRuleByPeriodName(x,config)).Where(x => x != null).ToList();
 
             //判斷是否執行Alert
             bool IsEnableAlert = false;

@@ -72,8 +72,10 @@ namespace RescueTime_SaveBusyDude
             return ErrorHandle.Execute(()=>_config.GetSystemSetting());
         }
 
-        public static ConfigModel.PeriodRule GetPeriodRuleByPeriodName(ConfigModel.JsonConfig config,string periodName)
+        public static ConfigModel.PeriodRule GetPeriodRuleByPeriodName(string periodName, ConfigModel.JsonConfig config = null)
         {
+            if (config == null)
+                config = GetJsonConfigData();
             return ErrorHandle.Execute(() => _config.GetPeriodRuleByPeriodName(config,periodName));
         }
 

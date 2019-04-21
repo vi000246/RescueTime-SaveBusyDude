@@ -47,10 +47,15 @@ namespace RescueTime_SaveBusyDude.Forms
             }
         }
 
+        void RefreshConfig()
+        {
+            this._config = ConfigUtil.GetJsonConfigData();
+        }
+
         public void BindingDataToControl()
         {
             initAlertRuleDataView();
-            initPeriodRuleDataView();
+            BindPeriodGridView();
             initDropDown();
             this.tbApiKey.Text = _config.Apikey;
         }
@@ -78,7 +83,7 @@ namespace RescueTime_SaveBusyDude.Forms
             }).ToList();
         }
 
-        public void initPeriodRuleDataView()
+        public void BindPeriodGridView()
         {
             this.gvPeriodSetting.DataSource = _config.Period;
         }
@@ -147,14 +152,43 @@ namespace RescueTime_SaveBusyDude.Forms
 
         private void btnPeriod_Add_Click(object sender, EventArgs e)
         {
-            DataGridViewRow row = (DataGridViewRow)gvPeriodSetting.Rows[0].Clone();
-
-            gvPeriodSetting.Rows.Add(row);
+            var popupForm = new PeriodRule();
+            popupForm.FormClosed += new FormClosedEventHandler(PeriodForm_Closed);
+            popupForm.Show();
         }
 
-        private void btnPeriod_Delete_Click(object sender, EventArgs e)
+        private void PeriodForm_Closed(object sender, FormClosedEventArgs e)
         {
+            RefreshConfig();
+            BindPeriodGridView();
+            gvPeriodSetting.Update();
+            gvPeriodSetting.Refresh();
+        }
+        private void btnPeriodDelete_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection dr = gvPeriodSetting.SelectedRows;
 
+            DialogResult result =
+                MessageBox.Show(
+                    "Confirm delete this record?",
+                    "Confirm",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                for (int i = 0; i < dr.Count; i++)
+                {
+                    string periodName = dr[i]
+                        .Cells[AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("PeriodName")].Value.ToString();
+                    ConfigUtil.DeletePeriodRuleByName(periodName);
+                }
+            }
+
+            RefreshConfig();
+            BindPeriodGridView();
+            gvPeriodSetting.Update();
+            gvPeriodSetting.Refresh();
         }
         #endregion
 

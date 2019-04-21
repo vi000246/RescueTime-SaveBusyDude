@@ -48,10 +48,7 @@
             this.btnAlertRule_Delete = new System.Windows.Forms.Button();
             this.Period = new System.Windows.Forms.TabPage();
             this.gvPeriodSetting = new System.Windows.Forms.DataGridView();
-            this.periodRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnPeriod_Add = new System.Windows.Forms.Button();
-            this.btnPeriod_Delete = new System.Windows.Forms.Button();
-            this.alertRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AlertName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AlertType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hour = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +59,12 @@
             this.EnablePeriodName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BlockWhenTrigger = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.CustomMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PeriodName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hour_begin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hour_end = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.periodRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.alertRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnPeriodDelete = new System.Windows.Forms.Button();
             this.tcConfigForm.SuspendLayout();
             this.Basic.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -231,6 +234,7 @@
             this.gvAlertRule.Location = new System.Drawing.Point(7, 7);
             this.gvAlertRule.Name = "gvAlertRule";
             this.gvAlertRule.RowTemplate.Height = 24;
+            this.gvAlertRule.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvAlertRule.Size = new System.Drawing.Size(1043, 277);
             this.gvAlertRule.TabIndex = 8;
             this.gvAlertRule.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvAlertRule_CellEndEdit);
@@ -255,9 +259,9 @@
             // 
             // Period
             // 
+            this.Period.Controls.Add(this.btnPeriodDelete);
             this.Period.Controls.Add(this.gvPeriodSetting);
             this.Period.Controls.Add(this.btnPeriod_Add);
-            this.Period.Controls.Add(this.btnPeriod_Delete);
             this.Period.Location = new System.Drawing.Point(4, 22);
             this.Period.Name = "Period";
             this.Period.Padding = new System.Windows.Forms.Padding(3);
@@ -269,42 +273,29 @@
             // gvPeriodSetting
             // 
             this.gvPeriodSetting.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvPeriodSetting.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.PeriodName1,
+            this.hour_begin,
+            this.hour_end});
             this.gvPeriodSetting.Location = new System.Drawing.Point(6, 6);
             this.gvPeriodSetting.Name = "gvPeriodSetting";
             this.gvPeriodSetting.RowTemplate.Height = 24;
+            this.gvPeriodSetting.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvPeriodSetting.Size = new System.Drawing.Size(448, 278);
             this.gvPeriodSetting.TabIndex = 12;
             this.gvPeriodSetting.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.gvPeriodSetting_CellBeginEdit);
             this.gvPeriodSetting.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvPeriodSetting_CellEndEdit);
             this.gvPeriodSetting.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gvPeriodSetting_CellValidating);
             // 
-            // periodRuleBindingSource
-            // 
-            this.periodRuleBindingSource.DataSource = typeof(RescueTime_SaveBusyDude.Model.ConfigModel.PeriodRule);
-            // 
             // btnPeriod_Add
             // 
-            this.btnPeriod_Add.Location = new System.Drawing.Point(470, 232);
+            this.btnPeriod_Add.Location = new System.Drawing.Point(472, 234);
             this.btnPeriod_Add.Name = "btnPeriod_Add";
             this.btnPeriod_Add.Size = new System.Drawing.Size(55, 23);
             this.btnPeriod_Add.TabIndex = 4;
             this.btnPeriod_Add.Text = "Add";
             this.btnPeriod_Add.UseVisualStyleBackColor = true;
             this.btnPeriod_Add.Click += new System.EventHandler(this.btnPeriod_Add_Click);
-            // 
-            // btnPeriod_Delete
-            // 
-            this.btnPeriod_Delete.Location = new System.Drawing.Point(470, 261);
-            this.btnPeriod_Delete.Name = "btnPeriod_Delete";
-            this.btnPeriod_Delete.Size = new System.Drawing.Size(55, 23);
-            this.btnPeriod_Delete.TabIndex = 3;
-            this.btnPeriod_Delete.Text = "Delete";
-            this.btnPeriod_Delete.UseVisualStyleBackColor = true;
-            this.btnPeriod_Delete.Click += new System.EventHandler(this.btnPeriod_Delete_Click);
-            // 
-            // alertRuleBindingSource
-            // 
-            this.alertRuleBindingSource.DataSource = typeof(RescueTime_SaveBusyDude.Model.ConfigModel.AlertRule);
             // 
             // AlertName
             // 
@@ -372,6 +363,43 @@
             this.CustomMessage.HeaderText = "CustomMessage";
             this.CustomMessage.Name = "CustomMessage";
             // 
+            // PeriodName1
+            // 
+            this.PeriodName1.DataPropertyName = "PeriodName";
+            this.PeriodName1.HeaderText = "PeriodName";
+            this.PeriodName1.Name = "PeriodName1";
+            this.PeriodName1.ReadOnly = true;
+            // 
+            // hour_begin
+            // 
+            this.hour_begin.DataPropertyName = "Hour_begin";
+            this.hour_begin.HeaderText = "Hour begin";
+            this.hour_begin.Name = "hour_begin";
+            // 
+            // hour_end
+            // 
+            this.hour_end.DataPropertyName = "Hour_end";
+            this.hour_end.HeaderText = "Hour end";
+            this.hour_end.Name = "hour_end";
+            // 
+            // periodRuleBindingSource
+            // 
+            this.periodRuleBindingSource.DataSource = typeof(RescueTime_SaveBusyDude.Model.ConfigModel.PeriodRule);
+            // 
+            // alertRuleBindingSource
+            // 
+            this.alertRuleBindingSource.DataSource = typeof(RescueTime_SaveBusyDude.Model.ConfigModel.AlertRule);
+            // 
+            // btnPeriodDelete
+            // 
+            this.btnPeriodDelete.Location = new System.Drawing.Point(472, 261);
+            this.btnPeriodDelete.Name = "btnPeriodDelete";
+            this.btnPeriodDelete.Size = new System.Drawing.Size(55, 23);
+            this.btnPeriodDelete.TabIndex = 13;
+            this.btnPeriodDelete.Text = "Delete";
+            this.btnPeriodDelete.UseVisualStyleBackColor = true;
+            this.btnPeriodDelete.Click += new System.EventHandler(this.btnPeriodDelete_Click);
+            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -408,7 +436,6 @@
         private System.Windows.Forms.ComboBox cbBlockingMode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnPeriod_Add;
-        private System.Windows.Forms.Button btnPeriod_Delete;
         private System.Windows.Forms.Button btnSaveBasic;
         private System.Windows.Forms.Button btnBlockingList_Add;
         private System.Windows.Forms.Button btnBlockingList_Delete;
@@ -430,5 +457,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EnablePeriodName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn BlockWhenTrigger;
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomMessage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PeriodName1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hour_begin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hour_end;
+        private System.Windows.Forms.Button btnPeriodDelete;
     }
 }

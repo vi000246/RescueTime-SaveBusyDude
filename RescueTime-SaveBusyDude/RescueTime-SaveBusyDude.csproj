@@ -114,6 +114,9 @@
     <EmbeddedResource Include="Forms\FocusMode.resx">
       <DependentUpon>FocusMode.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PeriodRule.resx">
+      <DependentUpon>PeriodRule.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
