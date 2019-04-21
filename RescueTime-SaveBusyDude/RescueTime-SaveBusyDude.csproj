@@ -85,6 +85,8 @@
     <Compile Include="Forms\PeriodRule.Designer.cs">
       <DependentUpon>PeriodRule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper\AttributeHelper.cs" />
+    <Compile Include="Helper\ColumnIndexAttribute.cs" />
     <Compile Include="Helper\ComboBoxHelper.cs" />
     <Compile Include="Model\IConfig.cs" />
     <Compile Include="Model\ConfigModel.cs" />

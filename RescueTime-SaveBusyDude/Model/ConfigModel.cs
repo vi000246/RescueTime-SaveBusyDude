@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using RescueTime_SaveBusyDude.Helper;
 
 namespace RescueTime_SaveBusyDude.Model
 {
@@ -23,9 +24,11 @@ namespace RescueTime_SaveBusyDude.Model
         {
             private int hour = 0;
             private int minute = 0;
+            [ColumnIndex(0)]
             public string alertName { get; set; }
 
             //累計時間所需達到的小時數
+            [ColumnIndex(2)]
             public int Hour
             {
                 get { return hour; }
@@ -35,6 +38,7 @@ namespace RescueTime_SaveBusyDude.Model
                 }
             }
             //累計時間所需達到的分鐘數
+            [ColumnIndex(3)]
             public int Minute
             {
                 get { return minute; }
@@ -45,13 +49,20 @@ namespace RescueTime_SaveBusyDude.Model
             }
 
             [JsonConverter(typeof(StringEnumConverter))]
+            [ColumnIndex(1)]
             public EnumModule.AlertType AlertType { get; set; }//只計算指定的Activity或是Productivity或是category
+            [ColumnIndex(4)]
             public string[] SpecificName { get; set; }//如果AlertType是SpecificCategory或是SpecificActivity，就計算此目錄的總計時間
+            [ColumnIndex(5)]
             public string[] PeriodName { get; set; }//用來統計此period內的總計時間，如果為空，預設撈全部
+            [ColumnIndex(9)]
             public string CustomMessage { get; set; }
+            [ColumnIndex(8)]
             public bool BlockWhenTrigger { get; set; }//當觸發alert rule時，阻擋這個AlertType
             [JsonProperty(ItemConverterType = typeof(StringEnumConverter))]
+            [ColumnIndex(6)]
             public List<EnumModule.WeekDays> EnableDays { get; set; }//設定alert要執行的星期
+            [ColumnIndex(7)]
             public string[] EnablePeriodName { get; set; }//設定alert要執行的period，如果為空，預設全時段都會觸發alert
         }
 
@@ -84,7 +95,9 @@ namespace RescueTime_SaveBusyDude.Model
         {
             private int hour_begin = 0;
             private int hour_end = 0;
+            [ColumnIndex(0)]
             public string PeriodName { get; set; }
+            [ColumnIndex(1)]
             public int Hour_begin
             {
                 get { return hour_begin; }
@@ -93,6 +106,7 @@ namespace RescueTime_SaveBusyDude.Model
                     hour_begin = (value < 0) ? 0 : (value > 24) ? 24 : value;
                 }
             }
+            [ColumnIndex(2)]
             public int Hour_end {
                 get { return hour_end; }
                 set
@@ -117,5 +131,6 @@ namespace RescueTime_SaveBusyDude.Model
             public string JsonBinApiKey { get; set; }
             public bool IsEnableLog { get; set; }
         }
+
     }
 }

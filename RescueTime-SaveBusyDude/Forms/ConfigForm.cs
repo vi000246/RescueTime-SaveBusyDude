@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RescueTime_SaveBusyDude.Helper;
 using RescueTime_SaveBusyDude.Model;
 
 namespace RescueTime_SaveBusyDude.Forms
@@ -19,11 +20,12 @@ namespace RescueTime_SaveBusyDude.Forms
         {
             InitializeComponent();
             BindingDataToControl();
-            this.tcConfigForm.Selecting += new TabControlCancelEventHandler(tcConfigForm_Selecting);
             ChangeFormSize(this.tcConfigForm.SelectedTab.Name);
+            this.tcConfigForm.Selecting += new TabControlCancelEventHandler(tcConfigForm_Selecting);
+            this.gvAlertRule.AutoGenerateColumns = false;
         }
 
-        
+        #region FormControl
 
         void tcConfigForm_Selecting(object sender, TabControlCancelEventArgs e)
         {
@@ -61,7 +63,6 @@ namespace RescueTime_SaveBusyDude.Forms
 
         public void initAlertRuleDataView()
         {
-            this.gvAlertRule.AutoGenerateColumns = false;
             this.gvAlertRule.DataSource = _config.Alert.Select(x=>new
             {
                 Hour = x.Hour,
@@ -81,15 +82,82 @@ namespace RescueTime_SaveBusyDude.Forms
         {
             this.gvPeriodSetting.DataSource = _config.Period;
         }
+        #endregion
 
-        public void RefreshAlertRuleDataView()
+        #region  ============  basic  ============
+
+        #endregion
+
+        #region ============  AlertRule  ============
+        private void gvAlertRule_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        public void RefreshPeriodRuleDataView()
+        #endregion
+
+        #region ============  Period  ============
+        int ValueBeforeEdit;
+        private void gvPeriodSetting_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            bool isInt = int.TryParse(gvPeriodSetting.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() ?? "", out ValueBeforeEdit);
+        }
+
+        private void gvPeriodSetting_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            int value = -1;
+            string periodName = gvPeriodSetting.Rows[e.RowIndex].Cells[AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("PeriodName")].Value.ToString() ?? "";
+            bool isInt = int.TryParse(gvPeriodSetting.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()??"",out value);
+            bool isValid = true;
+            gvPeriodSetting.Rows[e.RowIndex].ErrorText = "";
+
+            //update json
+            var period = _config.Period.FirstOrDefault(x => x.PeriodName == periodName);
+            if (period != null)
+            {
+                if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("Hour_begin"))
+                {
+                    period.Hour_begin = value;
+                }
+                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("Hour_end"))
+                {
+                    period.Hour_end = value;
+                }
+
+                ConfigUtil.InsertUpdatePeriodRule(period);
+            }
+        }
+        private void gvPeriodSetting_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+
+            int value = -1;
+            bool isInt = int.TryParse(e.FormattedValue.ToString(), out value);
+            if (gvPeriodSetting.Rows[e.RowIndex].IsNewRow) { return; }
+
+            if (e.ColumnIndex != AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("PeriodName"))
+            {
+                if (!isInt)
+                {
+                    gvPeriodSetting.Rows[e.RowIndex].ErrorText = "Value should be int";
+                    e.Cancel = true;
+                }
+            }
+        }
+
+
+        private void btnPeriod_Add_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow row = (DataGridViewRow)gvPeriodSetting.Rows[0].Clone();
+
+            gvPeriodSetting.Rows.Add(row);
+        }
+
+        private void btnPeriod_Delete_Click(object sender, EventArgs e)
         {
 
         }
+        #endregion
+
+
     }
 }
