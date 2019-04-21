@@ -44,16 +44,6 @@
             this.lbApiKey = new System.Windows.Forms.Label();
             this.AlertRule = new System.Windows.Forms.TabPage();
             this.gvAlertRule = new System.Windows.Forms.DataGridView();
-            this.AlertName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AlertType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Hour = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Minute = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SpecificName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PeriodName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EnableDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EnablePeriodName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BlockWhenTrigger = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.CustomMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAlertRule_Add = new System.Windows.Forms.Button();
             this.btnAlertRule_Delete = new System.Windows.Forms.Button();
             this.Period = new System.Windows.Forms.TabPage();
@@ -65,6 +55,16 @@
             this.btnPeriod_Add = new System.Windows.Forms.Button();
             this.periodRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.alertRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.AlertName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AlertType = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Hour = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Minute = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SpecificName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PeriodName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EnableDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EnablePeriodName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BlockWhenTrigger = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.CustomMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tcConfigForm.SuspendLayout();
             this.Basic.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -244,72 +244,6 @@
             this.gvAlertRule.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gvAlertRule_CellValidating);
             this.gvAlertRule.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvAlertRule_RowEnter);
             // 
-            // AlertName
-            // 
-            this.AlertName.DataPropertyName = "AlertName";
-            this.AlertName.Frozen = true;
-            this.AlertName.HeaderText = "AlertName";
-            this.AlertName.Name = "AlertName";
-            this.AlertName.ReadOnly = true;
-            // 
-            // AlertType
-            // 
-            this.AlertType.DataPropertyName = "AlertType";
-            this.AlertType.HeaderText = "AlertType";
-            this.AlertType.Name = "AlertType";
-            this.AlertType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.AlertType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Hour
-            // 
-            this.Hour.DataPropertyName = "Hour";
-            this.Hour.HeaderText = "Hour";
-            this.Hour.Name = "Hour";
-            // 
-            // Minute
-            // 
-            this.Minute.DataPropertyName = "Minute";
-            this.Minute.HeaderText = "Minute";
-            this.Minute.Name = "Minute";
-            // 
-            // SpecificName
-            // 
-            this.SpecificName.DataPropertyName = "SpecificName";
-            this.SpecificName.HeaderText = "SpecificName";
-            this.SpecificName.Name = "SpecificName";
-            // 
-            // PeriodName
-            // 
-            this.PeriodName.DataPropertyName = "PeriodName";
-            this.PeriodName.HeaderText = "PeriodName";
-            this.PeriodName.Name = "PeriodName";
-            // 
-            // EnableDays
-            // 
-            this.EnableDays.DataPropertyName = "EnableDays";
-            this.EnableDays.HeaderText = "EnableDays";
-            this.EnableDays.Name = "EnableDays";
-            // 
-            // EnablePeriodName
-            // 
-            this.EnablePeriodName.DataPropertyName = "EnablePeriodName";
-            this.EnablePeriodName.HeaderText = "EnablePeriodName";
-            this.EnablePeriodName.Name = "EnablePeriodName";
-            // 
-            // BlockWhenTrigger
-            // 
-            this.BlockWhenTrigger.DataPropertyName = "BlockWhenTrigger";
-            this.BlockWhenTrigger.FalseValue = "Disable";
-            this.BlockWhenTrigger.HeaderText = "BlockWhenTrigger";
-            this.BlockWhenTrigger.Name = "BlockWhenTrigger";
-            this.BlockWhenTrigger.TrueValue = "Enable";
-            // 
-            // CustomMessage
-            // 
-            this.CustomMessage.DataPropertyName = "CustomMessage";
-            this.CustomMessage.HeaderText = "CustomMessage";
-            this.CustomMessage.Name = "CustomMessage";
-            // 
             // btnAlertRule_Add
             // 
             this.btnAlertRule_Add.Location = new System.Drawing.Point(1056, 232);
@@ -406,6 +340,71 @@
             // 
             this.alertRuleBindingSource.DataSource = typeof(RescueTime_SaveBusyDude.Model.ConfigModel.AlertRule);
             // 
+            // AlertName
+            // 
+            this.AlertName.DataPropertyName = "AlertName";
+            this.AlertName.Frozen = true;
+            this.AlertName.HeaderText = "AlertName";
+            this.AlertName.Name = "AlertName";
+            this.AlertName.ReadOnly = true;
+            // 
+            // AlertType
+            // 
+            this.AlertType.DataPropertyName = "AlertType";
+            this.AlertType.HeaderText = "AlertType";
+            this.AlertType.Name = "AlertType";
+            this.AlertType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Hour
+            // 
+            this.Hour.DataPropertyName = "Hour";
+            this.Hour.HeaderText = "Hour";
+            this.Hour.Name = "Hour";
+            // 
+            // Minute
+            // 
+            this.Minute.DataPropertyName = "Minute";
+            this.Minute.HeaderText = "Minute";
+            this.Minute.Name = "Minute";
+            // 
+            // SpecificName
+            // 
+            this.SpecificName.DataPropertyName = "SpecificName";
+            this.SpecificName.HeaderText = "SpecificName";
+            this.SpecificName.Name = "SpecificName";
+            // 
+            // PeriodName
+            // 
+            this.PeriodName.DataPropertyName = "PeriodName";
+            this.PeriodName.HeaderText = "PeriodName";
+            this.PeriodName.Name = "PeriodName";
+            // 
+            // EnableDays
+            // 
+            this.EnableDays.DataPropertyName = "EnableDays";
+            this.EnableDays.HeaderText = "EnableDays";
+            this.EnableDays.Name = "EnableDays";
+            // 
+            // EnablePeriodName
+            // 
+            this.EnablePeriodName.DataPropertyName = "EnablePeriodName";
+            this.EnablePeriodName.HeaderText = "EnablePeriodName";
+            this.EnablePeriodName.Name = "EnablePeriodName";
+            // 
+            // BlockWhenTrigger
+            // 
+            this.BlockWhenTrigger.DataPropertyName = "BlockWhenTrigger";
+            this.BlockWhenTrigger.FalseValue = "";
+            this.BlockWhenTrigger.HeaderText = "BlockWhenTrigger";
+            this.BlockWhenTrigger.Name = "BlockWhenTrigger";
+            this.BlockWhenTrigger.TrueValue = "";
+            // 
+            // CustomMessage
+            // 
+            this.CustomMessage.DataPropertyName = "CustomMessage";
+            this.CustomMessage.HeaderText = "CustomMessage";
+            this.CustomMessage.Name = "CustomMessage";
+            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -453,8 +452,12 @@
         private System.Windows.Forms.BindingSource alertRuleBindingSource;
         private System.Windows.Forms.DataGridView gvPeriodSetting;
         private System.Windows.Forms.BindingSource periodRuleBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PeriodName1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hour_begin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hour_end;
+        private System.Windows.Forms.Button btnPeriodDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn AlertName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AlertType;
+        private System.Windows.Forms.DataGridViewComboBoxColumn AlertType;
         private System.Windows.Forms.DataGridViewTextBoxColumn Hour;
         private System.Windows.Forms.DataGridViewTextBoxColumn Minute;
         private System.Windows.Forms.DataGridViewTextBoxColumn SpecificName;
@@ -463,9 +466,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EnablePeriodName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn BlockWhenTrigger;
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomMessage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PeriodName1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hour_begin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hour_end;
-        private System.Windows.Forms.Button btnPeriodDelete;
     }
 }

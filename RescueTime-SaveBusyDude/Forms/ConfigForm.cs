@@ -64,7 +64,11 @@ namespace RescueTime_SaveBusyDude.Forms
         {
             cbBlockingMode.DataSource = Enum.GetValues(typeof(EnumModule.BlockingMode));
             cbBlockingMode.SelectedItem = _config.Focus.BlockingMode;
+            DataGridViewComboBoxColumn cbAlertType =
+                gvAlertRule.Columns[AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("AlertType")] as DataGridViewComboBoxColumn;
+            cbAlertType.DataSource = Enum.GetValues(typeof(EnumModule.AlertType));
         }
+
 
         public void initAlertRuleDataView()
         {
@@ -108,6 +112,7 @@ namespace RescueTime_SaveBusyDude.Forms
         {
 
             if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("Hour") ||
+                e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("AlertType") ||
                 e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("Minute") ||
                 e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("SpecificName") ||
                 e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("CustomMessage")||
@@ -120,11 +125,18 @@ namespace RescueTime_SaveBusyDude.Forms
                 gvAlertRule.CurrentCell.ReadOnly = false;
                 gvAlertRule.BeginEdit(true);
             }
-            else
+            else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("PeriodName"))
             {
-//                    gvAlertRule.EndEdit();
+                new PeriodNameForm(_config,1).Show();
             }
-
+            else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("EnablePeriodName"))
+            {
+                new PeriodNameForm(_config, 2).Show();
+            }
+            else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("EnableDays"))
+            {
+                new EnableDaysForm(_config).Show();
+            }
         }
 
         private void gvPeriodSetting_CellLeave(object sender, DataGridViewCellEventArgs e)
