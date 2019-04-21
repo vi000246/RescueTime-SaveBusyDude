@@ -90,7 +90,10 @@ namespace RescueTime_SaveBusyDude.Forms
         #endregion
 
         #region  ============  basic  ============
+        private void btnSaveBasic_Click(object sender, EventArgs e)
+        {
 
+        }
         #endregion
 
         #region ============  AlertRule  ============
@@ -190,6 +193,7 @@ namespace RescueTime_SaveBusyDude.Forms
             gvPeriodSetting.Update();
             gvPeriodSetting.Refresh();
         }
+
         #endregion
 
 

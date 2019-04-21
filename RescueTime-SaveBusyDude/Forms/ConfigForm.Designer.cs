@@ -109,6 +109,7 @@
             this.btnSaveBasic.TabIndex = 6;
             this.btnSaveBasic.Text = "Save";
             this.btnSaveBasic.UseVisualStyleBackColor = true;
+            this.btnSaveBasic.Click += new System.EventHandler(this.btnSaveBasic_Click);
             // 
             // groupBox1
             // 
