@@ -68,18 +68,19 @@ namespace RescueTime_SaveBusyDude.Forms
 
         public void initAlertRuleDataView()
         {
+            //p.s. 這裡的排序是Column Index的排序
             this.gvAlertRule.DataSource = _config.Alert.Select(x=>new
             {
-                Hour = x.Hour,
-                Minute = x.Minute,
                 AlertName = x.alertName,
                 AlertType = x.AlertType,
+                Hour = x.Hour,
+                Minute = x.Minute,
                 SpecificName = string.Join(",",x.SpecificName),
                 PeriodName = string.Join(",",x.PeriodName),
-                CustomMessage = x.CustomMessage,
+                EnableDays = string.Join(",", x.EnableDays),
+                EnablePeriodName = string.Join(",", x.EnablePeriodName),
                 BlockWhenTrigger = x.BlockWhenTrigger,
-                EnableDays = string.Join(",",x.EnableDays),
-                EnablePeriodName = string.Join(",",x.EnablePeriodName)
+                CustomMessage = x.CustomMessage
             }).ToList();
         }
 
@@ -97,14 +98,65 @@ namespace RescueTime_SaveBusyDude.Forms
         #endregion
 
         #region ============  AlertRule  ============
+
+        private void gvAlertRule_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void gvAlertRule_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("Hour") ||
+                e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("Minute") ||
+                e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("SpecificName") ||
+                e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("CustomMessage")||
+                e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("BlockWhenTrigger")
+            )
+            {
+                var columnName = AttributeHelper.GetColumnNameByIndex<ConfigModel.AlertRule>(e.ColumnIndex);
+                DataGridViewCell cell = gvAlertRule[columnName, e.RowIndex];
+                gvAlertRule.CurrentCell = cell;
+                gvAlertRule.CurrentCell.ReadOnly = false;
+                gvAlertRule.BeginEdit(true);
+            }
+            else
+            {
+//                    gvAlertRule.EndEdit();
+            }
+
+        }
+
+        private void gvPeriodSetting_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+//            gvAlertRule.EndEdit();
+        }
+
+        private void gvAlertRule_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+
+        }
+
         private void gvAlertRule_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
+        private void gvAlertRule_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+
+        }
+
+        private void gvAlertRule_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+        }
         #endregion
 
         #region ============  Period  ============
+
+
+
         int ValueBeforeEdit;
         private void gvPeriodSetting_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
@@ -193,6 +245,11 @@ namespace RescueTime_SaveBusyDude.Forms
             gvPeriodSetting.Update();
             gvPeriodSetting.Refresh();
         }
+
+
+
+
+
 
         #endregion
 
