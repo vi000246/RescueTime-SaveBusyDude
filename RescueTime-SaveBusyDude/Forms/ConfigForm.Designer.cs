@@ -44,17 +44,6 @@
             this.lbApiKey = new System.Windows.Forms.Label();
             this.AlertRule = new System.Windows.Forms.TabPage();
             this.gvAlertRule = new System.Windows.Forms.DataGridView();
-            this.btnAlertRule_Add = new System.Windows.Forms.Button();
-            this.btnAlertRule_Delete = new System.Windows.Forms.Button();
-            this.Period = new System.Windows.Forms.TabPage();
-            this.btnPeriodDelete = new System.Windows.Forms.Button();
-            this.gvPeriodSetting = new System.Windows.Forms.DataGridView();
-            this.PeriodName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hour_begin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hour_end = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnPeriod_Add = new System.Windows.Forms.Button();
-            this.periodRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.alertRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AlertName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AlertType = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Hour = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +54,22 @@
             this.EnablePeriodName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BlockWhenTrigger = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.CustomMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAlertRule_Add = new System.Windows.Forms.Button();
+            this.btnAlertRule_Delete = new System.Windows.Forms.Button();
+            this.Period = new System.Windows.Forms.TabPage();
+            this.btnPeriodDelete = new System.Windows.Forms.Button();
+            this.gvPeriodSetting = new System.Windows.Forms.DataGridView();
+            this.PeriodName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hour_begin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hour_end = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnPeriod_Add = new System.Windows.Forms.Button();
+            this.tbActivitySearch = new System.Windows.Forms.TabPage();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.tbSearchResult = new System.Windows.Forms.ListBox();
+            this.tbSearchField = new System.Windows.Forms.TextBox();
+            this.periodRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.alertRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             this.tcConfigForm.SuspendLayout();
             this.Basic.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -72,6 +77,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvAlertRule)).BeginInit();
             this.Period.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvPeriodSetting)).BeginInit();
+            this.tbActivitySearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.periodRuleBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertRuleBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -81,6 +87,7 @@
             this.tcConfigForm.Controls.Add(this.Basic);
             this.tcConfigForm.Controls.Add(this.AlertRule);
             this.tcConfigForm.Controls.Add(this.Period);
+            this.tcConfigForm.Controls.Add(this.tbActivitySearch);
             this.tcConfigForm.Location = new System.Drawing.Point(12, 12);
             this.tcConfigForm.Name = "tcConfigForm";
             this.tcConfigForm.SelectedIndex = 0;
@@ -244,6 +251,71 @@
             this.gvAlertRule.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gvAlertRule_CellValidating);
             this.gvAlertRule.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvAlertRule_RowEnter);
             // 
+            // AlertName
+            // 
+            this.AlertName.DataPropertyName = "AlertName";
+            this.AlertName.Frozen = true;
+            this.AlertName.HeaderText = "AlertName";
+            this.AlertName.Name = "AlertName";
+            this.AlertName.ReadOnly = true;
+            // 
+            // AlertType
+            // 
+            this.AlertType.DataPropertyName = "AlertType";
+            this.AlertType.HeaderText = "AlertType";
+            this.AlertType.Name = "AlertType";
+            this.AlertType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Hour
+            // 
+            this.Hour.DataPropertyName = "Hour";
+            this.Hour.HeaderText = "Hour";
+            this.Hour.Name = "Hour";
+            // 
+            // Minute
+            // 
+            this.Minute.DataPropertyName = "Minute";
+            this.Minute.HeaderText = "Minute";
+            this.Minute.Name = "Minute";
+            // 
+            // SpecificName
+            // 
+            this.SpecificName.DataPropertyName = "SpecificName";
+            this.SpecificName.HeaderText = "SpecificName";
+            this.SpecificName.Name = "SpecificName";
+            // 
+            // PeriodName
+            // 
+            this.PeriodName.DataPropertyName = "PeriodName";
+            this.PeriodName.HeaderText = "PeriodName";
+            this.PeriodName.Name = "PeriodName";
+            // 
+            // EnableDays
+            // 
+            this.EnableDays.DataPropertyName = "EnableDays";
+            this.EnableDays.HeaderText = "EnableDays";
+            this.EnableDays.Name = "EnableDays";
+            // 
+            // EnablePeriodName
+            // 
+            this.EnablePeriodName.DataPropertyName = "EnablePeriodName";
+            this.EnablePeriodName.HeaderText = "EnablePeriodName";
+            this.EnablePeriodName.Name = "EnablePeriodName";
+            // 
+            // BlockWhenTrigger
+            // 
+            this.BlockWhenTrigger.DataPropertyName = "BlockWhenTrigger";
+            this.BlockWhenTrigger.FalseValue = "";
+            this.BlockWhenTrigger.HeaderText = "BlockWhenTrigger";
+            this.BlockWhenTrigger.Name = "BlockWhenTrigger";
+            this.BlockWhenTrigger.TrueValue = "";
+            // 
+            // CustomMessage
+            // 
+            this.CustomMessage.DataPropertyName = "CustomMessage";
+            this.CustomMessage.HeaderText = "CustomMessage";
+            this.CustomMessage.Name = "CustomMessage";
+            // 
             // btnAlertRule_Add
             // 
             this.btnAlertRule_Add.Location = new System.Drawing.Point(1056, 232);
@@ -332,6 +404,47 @@
             this.btnPeriod_Add.UseVisualStyleBackColor = true;
             this.btnPeriod_Add.Click += new System.EventHandler(this.btnPeriod_Add_Click);
             // 
+            // tbActivitySearch
+            // 
+            this.tbActivitySearch.Controls.Add(this.label2);
+            this.tbActivitySearch.Controls.Add(this.btnSearch);
+            this.tbActivitySearch.Controls.Add(this.tbSearchResult);
+            this.tbActivitySearch.Controls.Add(this.tbSearchField);
+            this.tbActivitySearch.Location = new System.Drawing.Point(4, 22);
+            this.tbActivitySearch.Name = "tbActivitySearch";
+            this.tbActivitySearch.Padding = new System.Windows.Forms.Padding(3);
+            this.tbActivitySearch.Size = new System.Drawing.Size(1121, 290);
+            this.tbActivitySearch.TabIndex = 3;
+            this.tbActivitySearch.Text = "Activity Search";
+            this.tbActivitySearch.UseVisualStyleBackColor = true;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(272, 37);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // tbSearchResult
+            // 
+            this.tbSearchResult.FormattingEnabled = true;
+            this.tbSearchResult.ItemHeight = 12;
+            this.tbSearchResult.Location = new System.Drawing.Point(30, 106);
+            this.tbSearchResult.Name = "tbSearchResult";
+            this.tbSearchResult.Size = new System.Drawing.Size(495, 172);
+            this.tbSearchResult.TabIndex = 1;
+            // 
+            // tbSearchField
+            // 
+            this.tbSearchField.Location = new System.Drawing.Point(30, 24);
+            this.tbSearchField.Multiline = true;
+            this.tbSearchField.Name = "tbSearchField";
+            this.tbSearchField.Size = new System.Drawing.Size(236, 50);
+            this.tbSearchField.TabIndex = 0;
+            // 
             // periodRuleBindingSource
             // 
             this.periodRuleBindingSource.DataSource = typeof(RescueTime_SaveBusyDude.Model.ConfigModel.PeriodRule);
@@ -340,70 +453,14 @@
             // 
             this.alertRuleBindingSource.DataSource = typeof(RescueTime_SaveBusyDude.Model.ConfigModel.AlertRule);
             // 
-            // AlertName
+            // label2
             // 
-            this.AlertName.DataPropertyName = "AlertName";
-            this.AlertName.Frozen = true;
-            this.AlertName.HeaderText = "AlertName";
-            this.AlertName.Name = "AlertName";
-            this.AlertName.ReadOnly = true;
-            // 
-            // AlertType
-            // 
-            this.AlertType.DataPropertyName = "AlertType";
-            this.AlertType.HeaderText = "AlertType";
-            this.AlertType.Name = "AlertType";
-            this.AlertType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Hour
-            // 
-            this.Hour.DataPropertyName = "Hour";
-            this.Hour.HeaderText = "Hour";
-            this.Hour.Name = "Hour";
-            // 
-            // Minute
-            // 
-            this.Minute.DataPropertyName = "Minute";
-            this.Minute.HeaderText = "Minute";
-            this.Minute.Name = "Minute";
-            // 
-            // SpecificName
-            // 
-            this.SpecificName.DataPropertyName = "SpecificName";
-            this.SpecificName.HeaderText = "SpecificName";
-            this.SpecificName.Name = "SpecificName";
-            // 
-            // PeriodName
-            // 
-            this.PeriodName.DataPropertyName = "PeriodName";
-            this.PeriodName.HeaderText = "PeriodName";
-            this.PeriodName.Name = "PeriodName";
-            // 
-            // EnableDays
-            // 
-            this.EnableDays.DataPropertyName = "EnableDays";
-            this.EnableDays.HeaderText = "EnableDays";
-            this.EnableDays.Name = "EnableDays";
-            // 
-            // EnablePeriodName
-            // 
-            this.EnablePeriodName.DataPropertyName = "EnablePeriodName";
-            this.EnablePeriodName.HeaderText = "EnablePeriodName";
-            this.EnablePeriodName.Name = "EnablePeriodName";
-            // 
-            // BlockWhenTrigger
-            // 
-            this.BlockWhenTrigger.DataPropertyName = "BlockWhenTrigger";
-            this.BlockWhenTrigger.FalseValue = "";
-            this.BlockWhenTrigger.HeaderText = "BlockWhenTrigger";
-            this.BlockWhenTrigger.Name = "BlockWhenTrigger";
-            this.BlockWhenTrigger.TrueValue = "";
-            // 
-            // CustomMessage
-            // 
-            this.CustomMessage.DataPropertyName = "CustomMessage";
-            this.CustomMessage.HeaderText = "CustomMessage";
-            this.CustomMessage.Name = "CustomMessage";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(30, 81);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(205, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "可搜尋Actitivy或Category，用逗號分隔";
             // 
             // ConfigForm
             // 
@@ -422,6 +479,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvAlertRule)).EndInit();
             this.Period.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvPeriodSetting)).EndInit();
+            this.tbActivitySearch.ResumeLayout(false);
+            this.tbActivitySearch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.periodRuleBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alertRuleBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -466,5 +525,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EnablePeriodName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn BlockWhenTrigger;
         private System.Windows.Forms.DataGridViewTextBoxColumn CustomMessage;
+        private System.Windows.Forms.TabPage tbActivitySearch;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.ListBox tbSearchResult;
+        private System.Windows.Forms.TextBox tbSearchField;
+        private System.Windows.Forms.Label label2;
     }
 }

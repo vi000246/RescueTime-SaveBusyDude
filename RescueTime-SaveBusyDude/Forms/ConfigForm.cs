@@ -283,6 +283,34 @@ namespace RescueTime_SaveBusyDude.Forms
 
         #endregion
 
+        #region  ===========  Activity Search  ==========
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            var keywords = tbSearchField.Text.Replace("\r\n", "").Split(',');
+            if (keywords.Length == 0)
+            {
+                MessageBox.Show("Please input keywords, Separated by commas");
+                return;
+            }
+
+            var res = RescueTimeAPI.GetAllActivityData(DateTime.Now.AddMonths(-3),DateTime.Now);
+            var result = res.Where(x => 
+                keywords.Any(s => s.Equals(x.Activity, StringComparison.OrdinalIgnoreCase)) ||
+                keywords.Any(s => s.Equals(x.Category, StringComparison.OrdinalIgnoreCase))
+            );
+            var strResult = result.GroupBy(x => x.Category).Select(g => new
+            {
+                Activity = g.First().Activity,
+                Category = g.Key,
+                TimeSpent = g.Sum(x=>x.TimeSpent)
+            })
+            .Select(s => 
+                $"Activity: {s.Activity}  Category: {s.Category}  TimeSpent: {s.TimeSpent}"
+            ).ToList();
+            tbSearchResult.DataSource = strResult;
+        }
+        #endregion
+
 
     }
 }

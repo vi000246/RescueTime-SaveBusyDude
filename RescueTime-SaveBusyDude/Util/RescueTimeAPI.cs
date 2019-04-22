@@ -124,13 +124,24 @@ namespace RescueTime_SaveBusyDude
 
         public static List<ApiActivityResponse> GetActivityDataByHour(DateTime? date_begin = null, DateTime? date_end = null)
         {
-            string strDateBegin = date_begin.HasValue ? date_begin.Value.ToString("yyyy-mm-dd") : "";
-            string strDateEnd = date_end.HasValue ? date_end.Value.ToString("yyyy-mm-dd") : "";
+            string strDateBegin = date_begin.HasValue ? date_begin.Value.ToString("yyyy-MM-dd") : "";
+            string strDateEnd = date_end.HasValue ? date_end.Value.ToString("yyyy-MM-dd") : "";
 
             var url = BuildQueryString(perspective: EnumModule.perspective.interval,restrict_begin: strDateBegin,restrict_end:strDateEnd);
             var rawData = GetDataFromApi<DataApiResponse>(url);
             return ConvertJsonArrayToApiActivityResponse(rawData);
         }
+
+        public static List<ApiActivityResponse> GetAllActivityData(DateTime? date_begin = null, DateTime? date_end = null)
+        {
+            string strDateBegin = date_begin.HasValue ? date_begin.Value.ToString("yyyy-MM-dd") : "";
+            string strDateEnd = date_end.HasValue ? date_end.Value.ToString("yyyy-MM-dd") : "";
+
+            var url = BuildQueryString(perspective: EnumModule.perspective.interval, restrict_begin: strDateBegin, restrict_end: strDateEnd, resolution_time: EnumModule.resolution_time.week);
+            var rawData = GetDataFromApi<DataApiResponse>(url);
+            return ConvertJsonArrayToApiActivityResponse(rawData);
+        }
+
 
         //判斷此程式、domain name或分類名稱存不存在,用來設置block list
         public static bool IsActivityOrCategoryExist()
