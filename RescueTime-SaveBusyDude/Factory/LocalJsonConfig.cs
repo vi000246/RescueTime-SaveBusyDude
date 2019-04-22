@@ -57,8 +57,6 @@ namespace RescueTime_SaveBusyDude.Model
 
         private void UpdateJsonConfigData(ConfigModel.JsonConfig newJsonObj)
         {
-            //validation
-            //驗證是否有重覆alertName
             var modifiedJsonString = Newtonsoft.Json.JsonConvert.SerializeObject(newJsonObj);
             File.WriteAllText(_jsonFileName, modifiedJsonString, Encoding.UTF8);
             RefreshConfigData();

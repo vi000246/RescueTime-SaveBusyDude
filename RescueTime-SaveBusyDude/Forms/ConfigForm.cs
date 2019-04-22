@@ -234,7 +234,7 @@ namespace RescueTime_SaveBusyDude.Forms
         private void btnPeriodDelete_Click(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection dr = gvPeriodSetting.SelectedRows;
-
+            List<string> modifyAlertRule = new List<string>();
             DialogResult result =
                 MessageBox.Show(
                     "Confirm delete this record?",
@@ -248,6 +248,17 @@ namespace RescueTime_SaveBusyDude.Forms
                 {
                     string periodName = dr[i]
                         .Cells[AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("PeriodName")].Value.ToString();
+                    _config.Alert.Where(x =>
+                        x.PeriodName.Contains(periodName) || x.EnablePeriodName.Contains(periodName))
+                        .ToList()
+                        .ForEach(x =>
+                        {
+                            x.EnablePeriodName = x.EnablePeriodName.Where(w => w != periodName).ToArray();
+                            x.PeriodName = x.PeriodName.Where(w => w != periodName).ToArray();
+                            ConfigUtil.InsertUpdateAlertRule(x);
+                            modifyAlertRule.Add(x.alertName);
+                        });
+
                     ConfigUtil.DeletePeriodRuleByName(periodName);
                 }
             }
@@ -256,6 +267,13 @@ namespace RescueTime_SaveBusyDude.Forms
             BindPeriodGridView();
             gvPeriodSetting.Update();
             gvPeriodSetting.Refresh();
+            if (modifyAlertRule.Count > 0)
+            {
+                MessageBox.Show("Below alert rule has been modified：\n"+string.Join(",",modifyAlertRule));
+                initAlertRuleDataView();
+                gvAlertRule.Update();
+                gvAlertRule.Refresh();
+            }
         }
 
 
