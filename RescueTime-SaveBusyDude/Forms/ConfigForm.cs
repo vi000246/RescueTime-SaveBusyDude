@@ -15,6 +15,7 @@ namespace RescueTime_SaveBusyDude.Forms
     public partial class ConfigForm : Form
     {
         public ConfigModel.JsonConfig _config = ConfigUtil.GetJsonConfigData();
+        public bool IsConfigModify = false;
 
         public ConfigForm()
         {
@@ -26,7 +27,26 @@ namespace RescueTime_SaveBusyDude.Forms
         }
 
         #region FormControl
+        private void ConfigForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
 
+        }
+        private void ConfigForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (IsConfigModify)
+            {
+                DialogResult result =
+                    MessageBox.Show(
+                        "Restart application to refresh config?",
+                        "Yes",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    Application.Restart();
+                }
+            }
+        }
         void tcConfigForm_Selecting(object sender, TabControlCancelEventArgs e)
         {
             TabPage current = (sender as TabControl).SelectedTab;
@@ -49,6 +69,7 @@ namespace RescueTime_SaveBusyDude.Forms
 
         void RefreshConfig()
         {
+            this.IsConfigModify = true;
             this._config = ConfigUtil.GetJsonConfigData();
         }
 
@@ -309,6 +330,7 @@ namespace RescueTime_SaveBusyDude.Forms
             ).ToList();
             tbSearchResult.DataSource = strResult;
         }
+
         #endregion
 
 

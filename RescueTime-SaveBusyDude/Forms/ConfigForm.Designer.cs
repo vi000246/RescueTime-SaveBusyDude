@@ -64,12 +64,12 @@
             this.hour_end = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnPeriod_Add = new System.Windows.Forms.Button();
             this.tbActivitySearch = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.tbSearchResult = new System.Windows.Forms.ListBox();
             this.tbSearchField = new System.Windows.Forms.TextBox();
             this.periodRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.alertRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label2 = new System.Windows.Forms.Label();
             this.tcConfigForm.SuspendLayout();
             this.Basic.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -418,6 +418,15 @@
             this.tbActivitySearch.Text = "Activity Search";
             this.tbActivitySearch.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(30, 81);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(205, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "可搜尋Actitivy或Category，用逗號分隔";
+            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(272, 37);
@@ -453,15 +462,6 @@
             // 
             this.alertRuleBindingSource.DataSource = typeof(RescueTime_SaveBusyDude.Model.ConfigModel.AlertRule);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(205, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "可搜尋Actitivy或Category，用逗號分隔";
-            // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -470,6 +470,8 @@
             this.Controls.Add(this.tcConfigForm);
             this.Name = "ConfigForm";
             this.Text = "ConfigForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ConfigForm_FormClosed);
             this.tcConfigForm.ResumeLayout(false);
             this.Basic.ResumeLayout(false);
             this.Basic.PerformLayout();
