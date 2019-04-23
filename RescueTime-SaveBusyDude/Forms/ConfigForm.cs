@@ -172,7 +172,52 @@ namespace RescueTime_SaveBusyDude.Forms
 
         private void gvAlertRule_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            string AlertName = gvPeriodSetting.Rows[e.RowIndex].Cells[AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("AlertName")].Value.ToString() ?? "";
+            var value = gvPeriodSetting.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+            bool isValid = true;
+            gvPeriodSetting.Rows[e.RowIndex].ErrorText = "";
 
+            //update json
+            var alert = _config.Alert.FirstOrDefault(x => x.alertName == AlertName);
+            if (alert != null)
+            {
+                if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("AlertType"))
+                {
+                    alert.AlertType = (EnumModule.AlertType)gvAlertRule.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                }
+                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("Hour"))
+                {
+                    alert.Hour = int.Parse(value.ToString());
+                }
+                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("Minute"))
+                {
+                    alert.Minute = int.Parse(value.ToString());
+                }
+                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("SpecificName"))
+                {
+//                    alert.Hour = value;
+                }
+                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("EnableDays"))
+                {
+//                    alert.Hour = value;
+                }
+                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("EnablePeriodName"))
+                {
+//                    alert.Hour = value;
+                }
+                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("BlockWhenTrigger"))
+                {
+                    alert.BlockWhenTrigger = (bool)value;
+                }
+                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("CustomMessage"))
+                {
+                    alert.CustomMessage = value.ToString();
+                }
+
+                ConfigUtil.InsertUpdateAlertRule(alert);
+                this.IsConfigModify = true;
+                gvAlertRule.EndEdit();
+            }
         }
 
         private void gvAlertRule_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -218,6 +263,7 @@ namespace RescueTime_SaveBusyDude.Forms
                 }
 
                 ConfigUtil.InsertUpdatePeriodRule(period);
+                this.IsConfigModify = true;
             }
         }
         private void gvPeriodSetting_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
