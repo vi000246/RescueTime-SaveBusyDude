@@ -172,10 +172,10 @@ namespace RescueTime_SaveBusyDude.Forms
 
         private void gvAlertRule_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            string AlertName = gvPeriodSetting.Rows[e.RowIndex].Cells[AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("AlertName")].Value.ToString() ?? "";
-            var value = gvPeriodSetting.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+            string AlertName = gvAlertRule.Rows[e.RowIndex].Cells[AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("AlertName")].Value.ToString() ?? "";
+            var value = gvAlertRule.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
             bool isValid = true;
-            gvPeriodSetting.Rows[e.RowIndex].ErrorText = "";
+            gvAlertRule.Rows[e.RowIndex].ErrorText = "";
 
             //update json
             var alert = _config.Alert.FirstOrDefault(x => x.alertName == AlertName);
