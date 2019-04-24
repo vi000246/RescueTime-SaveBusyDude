@@ -130,10 +130,19 @@ namespace RescueTime_SaveBusyDude.Forms
             if (dgv.CurrentRow.Selected)
             {
                 var alertName = dgv.CurrentRow.Cells["alertName"].Value;
+                var popupForm = new AlertRuleForm(_config,EnumModule.formType.Add);
+                popupForm.FormClosed += new FormClosedEventHandler(AlertRuleForm_Closed);
+                popupForm.Show();
             }
 
         }
-      
+        private void AlertRuleForm_Closed(object sender, FormClosedEventArgs e)
+        {
+            RefreshConfig();
+            gvAlertRule.Update();
+            gvAlertRule.Refresh();
+        }
+
         #endregion
 
         #region ============  Period  ============

@@ -95,5 +95,10 @@ namespace RescueTime_SaveBusyDude
             Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
         }
 
+        public enum formType
+        {
+            Add,Edit
+        }
+
     }
 }
