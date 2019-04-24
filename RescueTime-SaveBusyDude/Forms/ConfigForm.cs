@@ -23,7 +23,6 @@ namespace RescueTime_SaveBusyDude.Forms
             BindingDataToControl();
             ChangeFormSize(this.tcConfigForm.SelectedTab.Name);
             this.tcConfigForm.Selecting += new TabControlCancelEventHandler(tcConfigForm_Selecting);
-            this.gvAlertRule.AutoGenerateColumns = false;
         }
 
         #region FormControl
@@ -85,16 +84,13 @@ namespace RescueTime_SaveBusyDude.Forms
         {
             cbBlockingMode.DataSource = Enum.GetValues(typeof(EnumModule.BlockingMode));
             cbBlockingMode.SelectedItem = _config.Focus.BlockingMode;
-            DataGridViewComboBoxColumn cbAlertType =
-                gvAlertRule.Columns[AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("AlertType")] as DataGridViewComboBoxColumn;
-            cbAlertType.DataSource = Enum.GetValues(typeof(EnumModule.AlertType));
         }
 
 
         public void initAlertRuleDataView()
         {
             //p.s. 這裡的排序是Column Index的排序
-            this.gvAlertRule.DataSource = _config.Alert.Select(x=>new
+            var itemStates = _config.Alert.Select(x=>new
             {
                 AlertName = x.alertName,
                 AlertType = x.AlertType,
@@ -107,6 +103,9 @@ namespace RescueTime_SaveBusyDude.Forms
                 BlockWhenTrigger = x.BlockWhenTrigger,
                 CustomMessage = x.CustomMessage
             }).ToList();
+            var bindingSource1 = new System.Windows.Forms.BindingSource { DataSource = itemStates };
+            this.gvAlertRule.DataSource = bindingSource1;
+            //            this.gvAlertRule.DataSource = _config.Alert;
         }
 
         public void BindPeriodGridView()
@@ -123,112 +122,18 @@ namespace RescueTime_SaveBusyDude.Forms
         #endregion
 
         #region ============  AlertRule  ============
-
-        private void gvAlertRule_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void gvAlertRule_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("Hour") ||
-                e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("AlertType") ||
-                e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("Minute") ||
-                e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("SpecificName") ||
-                e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("CustomMessage")||
-                e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("BlockWhenTrigger")
-            )
+            DataGridView dgv = sender as DataGridView;
+            if (dgv == null)
+                return;
+            if (dgv.CurrentRow.Selected)
             {
-                var columnName = AttributeHelper.GetColumnNameByIndex<ConfigModel.AlertRule>(e.ColumnIndex);
-                DataGridViewCell cell = gvAlertRule[columnName, e.RowIndex];
-                gvAlertRule.CurrentCell = cell;
-                gvAlertRule.CurrentCell.ReadOnly = false;
-                gvAlertRule.BeginEdit(true);
+                var alertName = dgv.CurrentRow.Cells["alertName"].Value;
             }
-            else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("PeriodName"))
-            {
-                new PeriodNameForm(_config,1).Show();
-            }
-            else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("EnablePeriodName"))
-            {
-                new PeriodNameForm(_config, 2).Show();
-            }
-            else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("EnableDays"))
-            {
-                new EnableDaysForm(_config).Show();
-            }
-        }
-
-        private void gvPeriodSetting_CellLeave(object sender, DataGridViewCellEventArgs e)
-        {
-//            gvAlertRule.EndEdit();
-        }
-
-        private void gvAlertRule_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
 
         }
-
-        private void gvAlertRule_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            string AlertName = gvAlertRule.Rows[e.RowIndex].Cells[AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("AlertName")].Value.ToString() ?? "";
-            var value = gvAlertRule.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-            bool isValid = true;
-            gvAlertRule.Rows[e.RowIndex].ErrorText = "";
-
-            //update json
-            var alert = _config.Alert.FirstOrDefault(x => x.alertName == AlertName);
-            if (alert != null)
-            {
-                if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("AlertType"))
-                {
-                    alert.AlertType = (EnumModule.AlertType)gvAlertRule.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-                }
-                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("Hour"))
-                {
-                    alert.Hour = int.Parse(value.ToString());
-                }
-                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("Minute"))
-                {
-                    alert.Minute = int.Parse(value.ToString());
-                }
-                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("SpecificName"))
-                {
-//                    alert.Hour = value;
-                }
-                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("EnableDays"))
-                {
-//                    alert.Hour = value;
-                }
-                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("EnablePeriodName"))
-                {
-//                    alert.Hour = value;
-                }
-                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("BlockWhenTrigger"))
-                {
-                    alert.BlockWhenTrigger = (bool)value;
-                }
-                else if (e.ColumnIndex == AttributeHelper.GetColumnIndex<ConfigModel.PeriodRule>("CustomMessage"))
-                {
-                    alert.CustomMessage = value.ToString();
-                }
-
-                ConfigUtil.InsertUpdateAlertRule(alert);
-                this.IsConfigModify = true;
-                gvAlertRule.EndEdit();
-            }
-        }
-
-        private void gvAlertRule_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-
-        }
-
-        private void gvAlertRule_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-
-        }
+      
         #endregion
 
         #region ============  Period  ============
@@ -376,6 +281,7 @@ namespace RescueTime_SaveBusyDude.Forms
             ).ToList();
             tbSearchResult.DataSource = strResult;
         }
+
 
         #endregion
 
