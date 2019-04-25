@@ -130,7 +130,7 @@ namespace RescueTime_SaveBusyDude.Forms
             if (dgv.CurrentRow.Selected)
             {
                 var alertName = dgv.CurrentRow.Cells["alertName"].Value;
-                var popupForm = new AlertRuleForm(_config,EnumModule.formType.Add);
+                var popupForm = new AlertRuleForm(_config,EnumModule.formType.Edit,alertName.ToString());
                 popupForm.FormClosed += new FormClosedEventHandler(AlertRuleForm_Closed);
                 popupForm.Show();
             }
@@ -139,6 +139,7 @@ namespace RescueTime_SaveBusyDude.Forms
         private void AlertRuleForm_Closed(object sender, FormClosedEventArgs e)
         {
             RefreshConfig();
+            initAlertRuleDataView();
             gvAlertRule.Update();
             gvAlertRule.Refresh();
         }

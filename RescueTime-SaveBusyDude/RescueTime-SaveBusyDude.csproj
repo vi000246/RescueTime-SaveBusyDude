@@ -61,29 +61,23 @@
     <Compile Include="BLL\ErrorHandle.cs" />
     <Compile Include="BLL\ProcessMapping.cs" />
     <Compile Include="Factory\ConfigFactory.cs" />
+    <Compile Include="Forms\AlertRuleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AlertRuleForm.Designer.cs">
+      <DependentUpon>AlertRuleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ConfigForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ConfigForm.Designer.cs">
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EnableDaysForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\EnableDaysForm.Designer.cs">
-      <DependentUpon>EnableDaysForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FocusMode.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FocusMode.Designer.cs">
       <DependentUpon>FocusMode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PeriodNameForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PeriodNameForm.Designer.cs">
-      <DependentUpon>PeriodNameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PeriodRule.cs">
       <SubType>Form</SubType>
@@ -114,17 +108,14 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AlertRuleForm.resx">
+      <DependentUpon>AlertRuleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EnableDaysForm.resx">
-      <DependentUpon>EnableDaysForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FocusMode.resx">
       <DependentUpon>FocusMode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PeriodNameForm.resx">
-      <DependentUpon>PeriodNameForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PeriodRule.resx">
       <DependentUpon>PeriodRule.cs</DependentUpon>
