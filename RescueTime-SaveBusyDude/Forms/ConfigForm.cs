@@ -122,6 +122,10 @@ namespace RescueTime_SaveBusyDude.Forms
         #endregion
 
         #region ============  AlertRule  ============
+        private void btnAlertRule_Add_Click(object sender, EventArgs e)
+        {
+            ShowAlertRuleForm(EnumModule.formType.Add);
+        }
         private void gvAlertRule_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dgv = sender as DataGridView;
@@ -130,12 +134,18 @@ namespace RescueTime_SaveBusyDude.Forms
             if (dgv.CurrentRow.Selected)
             {
                 var alertName = dgv.CurrentRow.Cells["alertName"].Value;
-                var popupForm = new AlertRuleForm(_config,EnumModule.formType.Edit,alertName.ToString());
-                popupForm.FormClosed += new FormClosedEventHandler(AlertRuleForm_Closed);
-                popupForm.Show();
+                ShowAlertRuleForm(EnumModule.formType.Edit,alertName.ToString());
             }
 
         }
+
+        private void ShowAlertRuleForm(EnumModule.formType formType,string alertName = "")
+        {
+            var popupForm = new AlertRuleForm(_config, formType, alertName);
+            popupForm.FormClosed += new FormClosedEventHandler(AlertRuleForm_Closed);
+            popupForm.Show();
+        }
+
         private void AlertRuleForm_Closed(object sender, FormClosedEventArgs e)
         {
             RefreshConfig();
@@ -291,6 +301,7 @@ namespace RescueTime_SaveBusyDude.Forms
             ).ToList();
             tbSearchResult.DataSource = strResult;
         }
+
 
 
         #endregion

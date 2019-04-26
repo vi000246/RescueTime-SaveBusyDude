@@ -76,16 +76,17 @@
             // lbAlertName
             // 
             this.lbAlertName.AutoSize = true;
-            this.lbAlertName.Location = new System.Drawing.Point(13, 12);
+            this.lbAlertName.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbAlertName.Location = new System.Drawing.Point(12, 9);
             this.lbAlertName.Name = "lbAlertName";
-            this.lbAlertName.Size = new System.Drawing.Size(67, 12);
+            this.lbAlertName.Size = new System.Drawing.Size(84, 15);
             this.lbAlertName.TabIndex = 4;
             this.lbAlertName.Text = "AlertName：";
             // 
             // cbAlertType
             // 
             this.cbAlertType.FormattingEnabled = true;
-            this.cbAlertType.Location = new System.Drawing.Point(83, 41);
+            this.cbAlertType.Location = new System.Drawing.Point(83, 59);
             this.cbAlertType.Name = "cbAlertType";
             this.cbAlertType.Size = new System.Drawing.Size(121, 20);
             this.cbAlertType.TabIndex = 5;
@@ -93,7 +94,7 @@
             // lbAlertType
             // 
             this.lbAlertType.AutoSize = true;
-            this.lbAlertType.Location = new System.Drawing.Point(16, 44);
+            this.lbAlertType.Location = new System.Drawing.Point(13, 63);
             this.lbAlertType.Name = "lbAlertType";
             this.lbAlertType.Size = new System.Drawing.Size(64, 12);
             this.lbAlertType.TabIndex = 6;
@@ -101,14 +102,14 @@
             // 
             // ddHour
             // 
-            this.ddHour.Location = new System.Drawing.Point(83, 67);
+            this.ddHour.Location = new System.Drawing.Point(83, 104);
             this.ddHour.Name = "ddHour";
             this.ddHour.Size = new System.Drawing.Size(56, 22);
             this.ddHour.TabIndex = 7;
             // 
             // ddMinute
             // 
-            this.ddMinute.Location = new System.Drawing.Point(81, 104);
+            this.ddMinute.Location = new System.Drawing.Point(83, 157);
             this.ddMinute.Name = "ddMinute";
             this.ddMinute.Size = new System.Drawing.Size(56, 22);
             this.ddMinute.TabIndex = 8;
@@ -133,7 +134,7 @@
             // cbBlockWhenTrigger
             // 
             this.cbBlockWhenTrigger.AutoSize = true;
-            this.cbBlockWhenTrigger.Location = new System.Drawing.Point(27, 144);
+            this.cbBlockWhenTrigger.Location = new System.Drawing.Point(18, 204);
             this.cbBlockWhenTrigger.Name = "cbBlockWhenTrigger";
             this.cbBlockWhenTrigger.Size = new System.Drawing.Size(121, 16);
             this.cbBlockWhenTrigger.TabIndex = 11;
@@ -160,7 +161,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 77);
+            this.label1.Location = new System.Drawing.Point(16, 106);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 14;
@@ -169,7 +170,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 114);
+            this.label2.Location = new System.Drawing.Point(16, 159);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 12);
             this.label2.TabIndex = 15;
