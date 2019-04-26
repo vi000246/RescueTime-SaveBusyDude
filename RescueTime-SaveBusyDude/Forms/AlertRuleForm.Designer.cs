@@ -43,6 +43,7 @@
             this.lbCustomMessage = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.tbAlertName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ddHour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ddMinute)).BeginInit();
             this.SuspendLayout();
@@ -52,8 +53,10 @@
             this.cbPeriodName.FormattingEnabled = true;
             this.cbPeriodName.Location = new System.Drawing.Point(256, 104);
             this.cbPeriodName.Name = "cbPeriodName";
+            this.cbPeriodName.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.cbPeriodName.Size = new System.Drawing.Size(101, 123);
             this.cbPeriodName.TabIndex = 0;
+            this.cbPeriodName.Click += new System.EventHandler(this.cbPeriodName_Click);
             // 
             // btnSave
             // 
@@ -76,10 +79,10 @@
             // lbAlertName
             // 
             this.lbAlertName.AutoSize = true;
-            this.lbAlertName.Font = new System.Drawing.Font("PMingLiU", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lbAlertName.Location = new System.Drawing.Point(12, 9);
+            this.lbAlertName.Font = new System.Drawing.Font("PMingLiU", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbAlertName.Location = new System.Drawing.Point(12, 19);
             this.lbAlertName.Name = "lbAlertName";
-            this.lbAlertName.Size = new System.Drawing.Size(84, 15);
+            this.lbAlertName.Size = new System.Drawing.Size(67, 12);
             this.lbAlertName.TabIndex = 4;
             this.lbAlertName.Text = "AlertName：";
             // 
@@ -122,14 +125,18 @@
             this.lbSpecificName.Name = "lbSpecificName";
             this.lbSpecificName.Size = new System.Drawing.Size(96, 124);
             this.lbSpecificName.TabIndex = 9;
+            this.lbSpecificName.DoubleClick += new System.EventHandler(this.lbSpecificName_DoubleClick);
+            this.lbSpecificName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbSpecificName_KeyDown);
             // 
             // cbEnablePeriodName
             // 
             this.cbEnablePeriodName.FormattingEnabled = true;
             this.cbEnablePeriodName.Location = new System.Drawing.Point(363, 106);
             this.cbEnablePeriodName.Name = "cbEnablePeriodName";
+            this.cbEnablePeriodName.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.cbEnablePeriodName.Size = new System.Drawing.Size(101, 123);
             this.cbEnablePeriodName.TabIndex = 10;
+            this.cbEnablePeriodName.Click += new System.EventHandler(this.cbEnablePeriodName_Click);
             // 
             // cbBlockWhenTrigger
             // 
@@ -176,11 +183,19 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "Minute：";
             // 
+            // tbAlertName
+            // 
+            this.tbAlertName.Location = new System.Drawing.Point(85, 16);
+            this.tbAlertName.Name = "tbAlertName";
+            this.tbAlertName.Size = new System.Drawing.Size(119, 22);
+            this.tbAlertName.TabIndex = 16;
+            // 
             // AlertRuleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(585, 232);
+            this.Controls.Add(this.tbAlertName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbCustomMessage);
@@ -222,5 +237,6 @@
         private System.Windows.Forms.Label lbCustomMessage;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbAlertName;
     }
 }

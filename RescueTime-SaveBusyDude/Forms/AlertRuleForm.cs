@@ -33,6 +33,7 @@ namespace RescueTime_SaveBusyDude.Forms
             if (formType == EnumModule.formType.Edit)
             {
                 this.alertRule = config.Alert.FirstOrDefault(x => x.alertName == alertName);
+                tbAlertName.Visible = false;
                 initData();
             }
             else
@@ -88,6 +89,11 @@ namespace RescueTime_SaveBusyDude.Forms
         private bool validate()
         {
             string errorMsg = "";
+            if (this.formType == EnumModule.formType.Add && string.IsNullOrEmpty(tbAlertName.Text))
+            {
+                errorMsg += "AlertName cannot be empty\n";
+            }
+            
             if (cbAlertType.SelectedIndex == -1)
             {
                 errorMsg += "Please select AlertType\n";
@@ -130,8 +136,8 @@ namespace RescueTime_SaveBusyDude.Forms
             this.alertRule.BlockWhenTrigger = cbBlockWhenTrigger.Checked;
             this.alertRule.CustomMessage = tbCusomMessage.Text;
             this.alertRule.SpecificName = lbSpecificName.Items.Cast<string>().ToArray();
-            this.alertRule.PeriodName = cbPeriodName.CheckedItems.Cast<string>().ToArray();
-            this.alertRule.EnablePeriodName = cbEnablePeriodName.CheckedItems.Cast<string>().ToArray();
+            this.alertRule.PeriodName = cbPeriodName.CheckedItems.Cast<ConfigModel.PeriodRule>().Select(x => x.PeriodName).ToArray();
+            this.alertRule.EnablePeriodName = cbEnablePeriodName.CheckedItems.Cast<ConfigModel.PeriodRule>().Select(x=>x.PeriodName).ToArray();
             this.alertRule.EnableDays = cbEnableDays.CheckedItems.Cast<EnumModule.WeekDays>().ToList();
         }
 
@@ -164,6 +170,81 @@ namespace RescueTime_SaveBusyDude.Forms
                 BindDataFromControl();
                 ConfigUtil.InsertUpdateAlertRule(this.alertRule);
                 MessageBox.Show("Edit Sucess!");
+            }
+        }
+        private void cbPeriodName_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < cbPeriodName.Items.Count; i++)
+            {
+                if (cbPeriodName.GetItemRectangle(i).Contains(cbPeriodName.PointToClient(MousePosition)))
+                {
+                    switch (cbPeriodName.GetItemCheckState(i))
+                    {
+                        case CheckState.Checked:
+                            cbPeriodName.SetItemCheckState(i, CheckState.Unchecked);
+                            break;
+                        case CheckState.Indeterminate:
+                        case CheckState.Unchecked:
+                            cbPeriodName.SetItemCheckState(i, CheckState.Checked);
+                            break;
+                    }
+
+                }
+
+            }
+        }
+
+        private void cbEnablePeriodName_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < cbEnablePeriodName.Items.Count; i++)
+            {
+                if (cbEnablePeriodName.GetItemRectangle(i).Contains(cbEnablePeriodName.PointToClient(MousePosition)))
+                {
+                    switch (cbEnablePeriodName.GetItemCheckState(i))
+                    {
+                        case CheckState.Checked:
+                            cbEnablePeriodName.SetItemCheckState(i, CheckState.Unchecked);
+                            break;
+                        case CheckState.Indeterminate:
+                        case CheckState.Unchecked:
+                            cbEnablePeriodName.SetItemCheckState(i, CheckState.Checked);
+                            break;
+                    }
+
+                }
+
+            }
+        }
+
+        private void lbSpecificName_DoubleClick(object sender, EventArgs e)
+        {
+            SpecificNameForm snForm = new SpecificNameForm();
+
+            if (snForm.ShowDialog(this) == DialogResult.OK)
+            {
+                var SName = snForm.GetName();
+                if (!string.IsNullOrEmpty(SName) && ListBox.NoMatches == lbSpecificName.FindStringExact(SName))
+                {
+                    lbSpecificName.Items.Add(SName);
+                }
+            }
+            snForm.Dispose();
+        }
+
+        private void lbSpecificName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                ListBox.SelectedObjectCollection selectedItems = new ListBox.SelectedObjectCollection(lbSpecificName);
+                selectedItems = lbSpecificName.SelectedItems;
+
+                if (lbSpecificName.SelectedIndex != -1)
+                {
+                    for (int i = selectedItems.Count - 1; i >= 0; i--)
+                        lbSpecificName.Items.Remove(selectedItems[i]);
+                }
+                else
+                    MessageBox.Show("Select at least one SpecificName to delete.");
             }
         }
     }

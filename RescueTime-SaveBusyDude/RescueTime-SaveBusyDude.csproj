@@ -85,6 +85,12 @@
     <Compile Include="Forms\PeriodRule.Designer.cs">
       <DependentUpon>PeriodRule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SpecificNameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SpecificNameForm.Designer.cs">
+      <DependentUpon>SpecificNameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helper\AttributeHelper.cs" />
     <Compile Include="Helper\ColumnIndexAttribute.cs" />
     <Compile Include="Helper\ComboBoxHelper.cs" />
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PeriodRule.resx">
       <DependentUpon>PeriodRule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SpecificNameForm.resx">
+      <DependentUpon>SpecificNameForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
