@@ -245,7 +245,7 @@
             this.gvAlertRule.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvAlertRule.Size = new System.Drawing.Size(1043, 277);
             this.gvAlertRule.TabIndex = 8;
-            this.gvAlertRule.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvAlertRule_CellClick);
+            this.gvAlertRule.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvAlertRule_CellDoubleClick);
             // 
             // AlertName
             // 
@@ -331,6 +331,7 @@
             this.btnAlertRule_Delete.TabIndex = 6;
             this.btnAlertRule_Delete.Text = "Delete";
             this.btnAlertRule_Delete.UseVisualStyleBackColor = true;
+            this.btnAlertRule_Delete.Click += new System.EventHandler(this.btnAlertRule_Delete_Click);
             // 
             // Period
             // 

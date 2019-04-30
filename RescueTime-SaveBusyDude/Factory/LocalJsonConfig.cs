@@ -100,14 +100,15 @@ namespace RescueTime_SaveBusyDude.Model
             RefreshConfigData();
         }
 
-        private void DeleteAlertRecordByName(string Name) {
-            var OldRuleIndex = _config.AlertRecord.FindIndex(c => c.AlertName.Equals(Name, StringComparison.OrdinalIgnoreCase));
+        private void DeleteAlertRecordByName(string Name)
+        {
+            var OldRuleIndex = _config.AlertRecord.FindIndex(c => c.AlertName!=null && c.AlertName.Equals(Name, StringComparison.OrdinalIgnoreCase));
             if (OldRuleIndex > -1)
             {
                 _config.AlertRecord.RemoveAt(OldRuleIndex);
+                UpdateJsonConfigData(_config);
+                RefreshConfigData();
             }
-            UpdateJsonConfigData(_config);
-            RefreshConfigData();
         }
 
         public void InsertUpdateFocusSetting(ConfigModel.FocusSetting setting)

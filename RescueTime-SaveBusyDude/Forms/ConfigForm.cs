@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RescueTime_SaveBusyDude.BLL;
 using RescueTime_SaveBusyDude.Helper;
 using RescueTime_SaveBusyDude.Model;
 
@@ -126,7 +127,8 @@ namespace RescueTime_SaveBusyDude.Forms
         {
             ShowAlertRuleForm(EnumModule.formType.Add);
         }
-        private void gvAlertRule_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private void gvAlertRule_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dgv = sender as DataGridView;
             if (dgv == null)
@@ -134,9 +136,8 @@ namespace RescueTime_SaveBusyDude.Forms
             if (dgv.CurrentRow.Selected)
             {
                 var alertName = dgv.CurrentRow.Cells["alertName"].Value;
-                ShowAlertRuleForm(EnumModule.formType.Edit,alertName.ToString());
+                ShowAlertRuleForm(EnumModule.formType.Edit, alertName.ToString());
             }
-
         }
 
         private void ShowAlertRuleForm(EnumModule.formType formType,string alertName = "")
@@ -153,7 +154,31 @@ namespace RescueTime_SaveBusyDude.Forms
             gvAlertRule.Update();
             gvAlertRule.Refresh();
         }
+        private void btnAlertRule_Delete_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection dr = gvAlertRule.SelectedRows;
+            DialogResult result =
+                MessageBox.Show(
+                    "Confirm delete this record?",
+                    "Confirm",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
 
+            if (result == DialogResult.Yes)
+            {
+                for (int i = 0; i < dr.Count; i++)
+                {
+                    string AlertName = dr[i]
+                        .Cells[AttributeHelper.GetColumnIndex<ConfigModel.AlertRule>("alertName")].Value.ToString();
+                    ConfigUtil.DeleteAlertRuleByName(AlertName);
+                }
+            }
+
+            RefreshConfig();
+            initAlertRuleDataView();
+            gvAlertRule.Update();
+            gvAlertRule.Refresh();
+        }
         #endregion
 
         #region ============  Period  ============
@@ -301,6 +326,8 @@ namespace RescueTime_SaveBusyDude.Forms
             ).ToList();
             tbSearchResult.DataSource = strResult;
         }
+
+
 
 
 

@@ -47,6 +47,9 @@ namespace RescueTime_SaveBusyDude.Forms
                         cbEnableDays.SetItemChecked(count, true);
                     }
                 }
+                //auto select default period
+                cbPeriodName.SetItemChecked(0, true);
+                cbEnablePeriodName.SetItemChecked(0,true);
             }
         }
 
@@ -57,7 +60,7 @@ namespace RescueTime_SaveBusyDude.Forms
             ddMinute.Value = alertRule.Minute;
             cbBlockWhenTrigger.Checked = alertRule.BlockWhenTrigger;
             tbCusomMessage.Text = alertRule.CustomMessage;
-            lbAlertName.Text = alertRule.alertName;
+            lbAlertName.Text = "AlertName：" + alertRule.alertName;
             foreach (var name in alertRule.SpecificName)
             {
                 lbSpecificName.Items.Add(name);
@@ -98,6 +101,13 @@ namespace RescueTime_SaveBusyDude.Forms
             {
                 errorMsg += "Please select AlertType\n";
             }
+            else if(((EnumModule.AlertType)cbAlertType.SelectedItem == EnumModule.AlertType.SpecificActivity||
+                    (EnumModule.AlertType)cbAlertType.SelectedItem == EnumModule.AlertType.SpecificCategory||
+                    (EnumModule.AlertType)cbAlertType.SelectedItem == EnumModule.AlertType.SpecificCategoryOrActivity) &&
+                    lbSpecificName.Items.Count == 0)
+            {
+                errorMsg += "Please add SpecificName";
+            }
 
             if (ddHour.Value == 0 && ddMinute.Value == 0)
             {
@@ -130,6 +140,8 @@ namespace RescueTime_SaveBusyDude.Forms
 
         private void BindDataFromControl()
         {
+            if(this.formType == EnumModule.formType.Add)
+                this.alertRule.alertName = tbAlertName.Text;
             this.alertRule.AlertType = (EnumModule.AlertType) cbAlertType.SelectedItem;
             this.alertRule.Hour = int.Parse(ddHour.Value.ToString());
             this.alertRule.Minute = int.Parse(ddMinute.Value.ToString());
@@ -159,7 +171,11 @@ namespace RescueTime_SaveBusyDude.Forms
             {
                 BindDataFromControl();
                 ConfigUtil.InsertUpdateAlertRule(this.alertRule);
-                MessageBox.Show("Add Success!");
+                DialogResult Result = MessageBox.Show("Add Success!", "", MessageBoxButtons.OK);
+                if (Result == DialogResult.OK)
+                {
+                    this.Close();
+                }
             }
         }
 
@@ -169,50 +185,44 @@ namespace RescueTime_SaveBusyDude.Forms
             {
                 BindDataFromControl();
                 ConfigUtil.InsertUpdateAlertRule(this.alertRule);
-                MessageBox.Show("Edit Sucess!");
+                DialogResult Result = MessageBox.Show("Edit Success!", "", MessageBoxButtons.OK);
+                if (Result == DialogResult.OK)
+                {
+                    this.Close();
+                }
             }
         }
         private void cbPeriodName_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < cbPeriodName.Items.Count; i++)
-            {
-                if (cbPeriodName.GetItemRectangle(i).Contains(cbPeriodName.PointToClient(MousePosition)))
-                {
-                    switch (cbPeriodName.GetItemCheckState(i))
-                    {
-                        case CheckState.Checked:
-                            cbPeriodName.SetItemCheckState(i, CheckState.Unchecked);
-                            break;
-                        case CheckState.Indeterminate:
-                        case CheckState.Unchecked:
-                            cbPeriodName.SetItemCheckState(i, CheckState.Checked);
-                            break;
-                    }
-
-                }
-
-            }
+            SetCheckBoxItem(cbPeriodName);
         }
 
         private void cbEnablePeriodName_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < cbEnablePeriodName.Items.Count; i++)
+            SetCheckBoxItem(cbEnablePeriodName);
+        }
+        private void cbEnableDays_Click(object sender, EventArgs e)
+        {
+            SetCheckBoxItem(cbEnableDays);
+        }
+
+        private void SetCheckBoxItem(CheckedListBox checkbox)
+        {
+            for (int i = 0; i < checkbox.Items.Count; i++)
             {
-                if (cbEnablePeriodName.GetItemRectangle(i).Contains(cbEnablePeriodName.PointToClient(MousePosition)))
+                if (checkbox.GetItemRectangle(i).Contains(checkbox.PointToClient(MousePosition)))
                 {
-                    switch (cbEnablePeriodName.GetItemCheckState(i))
+                    switch (checkbox.GetItemCheckState(i))
                     {
                         case CheckState.Checked:
-                            cbEnablePeriodName.SetItemCheckState(i, CheckState.Unchecked);
+                            checkbox.SetItemCheckState(i, CheckState.Unchecked);
                             break;
                         case CheckState.Indeterminate:
                         case CheckState.Unchecked:
-                            cbEnablePeriodName.SetItemCheckState(i, CheckState.Checked);
+                            checkbox.SetItemCheckState(i, CheckState.Checked);
                             break;
                     }
-
                 }
-
             }
         }
 
@@ -247,5 +257,7 @@ namespace RescueTime_SaveBusyDude.Forms
                     MessageBox.Show("Select at least one SpecificName to delete.");
             }
         }
+
+
     }
 }
