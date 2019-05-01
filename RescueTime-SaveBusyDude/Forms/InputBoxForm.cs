@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace RescueTime_SaveBusyDude.Forms
 {
-    public partial class SpecificNameForm : Form
+    public partial class InputBoxForm : Form
     {
-        public SpecificNameForm()
+        public InputBoxForm()
         {
             InitializeComponent();
         }

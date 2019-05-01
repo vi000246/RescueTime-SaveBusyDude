@@ -1,6 +1,6 @@
 ﻿namespace RescueTime_SaveBusyDude.Forms
 {
-    partial class SpecificNameForm
+    partial class InputBoxForm
     {
         /// <summary>
         /// Required designer variable.

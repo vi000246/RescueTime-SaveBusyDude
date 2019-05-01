@@ -40,6 +40,7 @@
       <HintPath>..\..\..\Common\packages\Newtonsoft.Json.12.0.2-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
@@ -85,11 +86,11 @@
     <Compile Include="Forms\PeriodRule.Designer.cs">
       <DependentUpon>PeriodRule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SpecificNameForm.cs">
+    <Compile Include="Forms\InputBoxForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SpecificNameForm.Designer.cs">
-      <DependentUpon>SpecificNameForm.cs</DependentUpon>
+    <Compile Include="Forms\InputBoxForm.Designer.cs">
+      <DependentUpon>InputBoxForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\AttributeHelper.cs" />
     <Compile Include="Helper\ColumnIndexAttribute.cs" />
@@ -126,8 +127,8 @@
     <EmbeddedResource Include="Forms\PeriodRule.resx">
       <DependentUpon>PeriodRule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SpecificNameForm.resx">
-      <DependentUpon>SpecificNameForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\InputBoxForm.resx">
+      <DependentUpon>InputBoxForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

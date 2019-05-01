@@ -72,6 +72,11 @@ namespace RescueTime_SaveBusyDude
             return ErrorHandle.Execute(()=>_config.GetSystemSetting());
         }
 
+        public static void UpdateSystemSetting(ConfigModel.SystemSetting setting)
+        {
+            ErrorHandle.Execute(() => _config.UpdateSystemSetting(setting));
+        }
+
         public static ConfigModel.PeriodRule GetPeriodRuleByPeriodName(string periodName, ConfigModel.JsonConfig config = null)
         {
             if (config == null)

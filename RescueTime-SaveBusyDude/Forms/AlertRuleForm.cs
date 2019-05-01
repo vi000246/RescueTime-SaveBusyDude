@@ -228,7 +228,7 @@ namespace RescueTime_SaveBusyDude.Forms
 
         private void lbSpecificName_DoubleClick(object sender, EventArgs e)
         {
-            SpecificNameForm snForm = new SpecificNameForm();
+            InputBoxForm snForm = new InputBoxForm();
 
             if (snForm.ShowDialog(this) == DialogResult.OK)
             {

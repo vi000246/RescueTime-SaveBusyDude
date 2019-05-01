@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -73,17 +75,29 @@ namespace RescueTime_SaveBusyDude.Model
             _config.DeletePeriodRuleByName(periodName);
         }
 
-        //this method should be private
-        //        public ConfigModel.JsonConfig UpdateJsonConfigData(ConfigModel.JsonConfig newJsonObj)
-        //        {
-        //            _config.UpdateJsonConfigData(newJsonObj);
-        //            return _config.GetJsonConfigData();
-        //        }
-
         //取得本地的系統設置
         public ConfigModel.SystemSetting GetSystemSetting()
         {
-            throw new NotImplementedException();
+            var setting = new ConfigModel.SystemSetting();
+            setting.JsonBinSecretKey = ConfigurationManager.AppSettings["JsonBinSecretKey"];
+            setting.JsonBinPath = ConfigurationManager.AppSettings["JsonBinPath"];
+            setting.IsEnableLog = Boolean.Parse(ConfigurationManager.AppSettings["IsEnableLog"] ?? "false");
+            setting.AlertScanInterval = int.Parse(ConfigurationManager.AppSettings["AlertScanInterval"] ?? "300");
+            setting.IsEnableJsonBin = bool.Parse(ConfigurationManager.AppSettings["IsEnableJsonBin"] ?? "false");
+            return setting;
+        }
+
+        public void UpdateSystemSetting(ConfigModel.SystemSetting setting)
+        {
+            Configuration configuration = ConfigurationManager.
+            OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+            configuration.AppSettings.Settings["JsonBinSecretKey"].Value = setting.JsonBinSecretKey;
+            configuration.AppSettings.Settings["JsonBinPath"].Value = setting.JsonBinPath;
+            configuration.AppSettings.Settings["IsEnableLog"].Value = setting.IsEnableLog.ToString();
+            configuration.AppSettings.Settings["IsEnableJsonBin"].Value = setting.IsEnableJsonBin.ToString();
+            configuration.AppSettings.Settings["AlertScanInterval"].Value = setting.AlertScanInterval.ToString();
+            configuration.Save();
+            ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }

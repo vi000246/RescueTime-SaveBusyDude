@@ -16,6 +16,7 @@ namespace RescueTime_SaveBusyDude.Forms
     public partial class ConfigForm : Form
     {
         public ConfigModel.JsonConfig _config = ConfigUtil.GetJsonConfigData();
+        public ConfigModel.SystemSetting _SysConfig = ConfigUtil.GetSystemSetting();
         public bool IsConfigModify = false;
 
         public ConfigForm()
@@ -77,6 +78,7 @@ namespace RescueTime_SaveBusyDude.Forms
         {
             initAlertRuleDataView();
             BindPeriodGridView();
+            BindBasicConfig();
             initDropDown();
             this.tbApiKey.Text = _config.Apikey;
         }
@@ -113,10 +115,77 @@ namespace RescueTime_SaveBusyDude.Forms
         {
             this.gvPeriodSetting.DataSource = _config.Period;
         }
+
+        public void BindBasicConfig()
+        {
+            tbApiKey.Text = _config.Apikey;
+            cbBlockingMode.SelectedItem = _config.Focus.BlockingMode;
+            foreach (var item in _config.Focus.blockingList)
+            {
+                lbBlockingList.Items.Add(item);
+            }
+            tbJsonBinSecretKey.Text = _SysConfig.JsonBinSecretKey;
+            tbJsonBinPath.Text = _SysConfig.JsonBinPath;
+            tbAlertScanInterval.Value = _SysConfig.AlertScanInterval;
+            cbIsEnableLog.Checked = _SysConfig.IsEnableLog;
+            cbIsEnableJsonBin.Checked = _SysConfig.IsEnableJsonBin;
+        }
         #endregion
 
         #region  ============  basic  ============
         private void btnSaveBasic_Click(object sender, EventArgs e)
+        {
+            bool validate = true;
+            string errMsg = "";
+            if (string.IsNullOrEmpty(tbApiKey.Text))
+            {
+                validate = false;
+                errMsg += "Please input RescueTime API key!\n";
+            }
+            if (cbIsEnableJsonBin.Checked && (string.IsNullOrEmpty(tbJsonBinSecretKey.Text) || string.IsNullOrEmpty(tbJsonBinPath.Text)))
+            {
+                validate = false;
+                errMsg += "Please input  JsonBin secret key and path!\n";
+            }
+            if (!int.TryParse(tbAlertScanInterval.Value.ToString(), out int interval))
+            {
+                validate = false;
+                errMsg += "Please input  alert scan interval!\n";
+            }
+
+            _SysConfig.JsonBinSecretKey = tbJsonBinSecretKey.Text;
+            _SysConfig.JsonBinPath = tbJsonBinPath.Text;
+            _SysConfig.AlertScanInterval = int.Parse(tbAlertScanInterval.Value.ToString());
+            _SysConfig.IsEnableLog = cbIsEnableLog.Checked;
+            _SysConfig.IsEnableJsonBin = cbIsEnableJsonBin.Checked;
+            _config.Focus.BlockingMode = (EnumModule.BlockingMode)cbBlockingMode.SelectedItem;
+            _config.Focus.blockingList = lbBlockingList.Items.Cast<string>().ToList();
+
+            if (validate)
+            {
+                ConfigUtil.UpdateSystemSetting(_SysConfig);
+                ConfigUtil.InsertUpdateApiKey(tbApiKey.Text);
+                ConfigUtil.InsertUpdateFocusSetting(_config.Focus);
+                RefreshConfig();
+                MessageBox.Show("Save sucess!");
+            }
+            else
+            {
+                MessageBox.Show(errMsg);
+            }
+        }
+
+        private void BtnBlockingList_Add_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnBlockingList_Edit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnBlockingList_Delete_Click(object sender, EventArgs e)
         {
 
         }
@@ -326,6 +395,7 @@ namespace RescueTime_SaveBusyDude.Forms
             ).ToList();
             tbSearchResult.DataSource = strResult;
         }
+
 
 
 

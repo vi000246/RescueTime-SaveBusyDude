@@ -128,9 +128,12 @@ namespace RescueTime_SaveBusyDude.Model
 
         public class SystemSetting
         {
-            public string JsonBinApiKey { get; set; }
+            public string JsonBinSecretKey { get; set; }
+            public string JsonBinPath { get; set; }
             public bool IsEnableLog { get; set; }
+            public int AlertScanInterval { get; set; }
+            public bool IsEnableJsonBin { get; set; }
         }
 
-    }
+    }　
 }
