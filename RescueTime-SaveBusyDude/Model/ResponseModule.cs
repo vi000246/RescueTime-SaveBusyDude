@@ -20,6 +20,7 @@ namespace RescueTime_SaveBusyDude
         public int NumberOfPeople { get; set; }
         public string Activity { get; set; }//程式名稱
         public string Category { get; set; }//程式分類
+        public string Document { get; set; }//視窗標題
         public EnumModule.Productivity Productivity { get; set; }//生產力程度
     }
 

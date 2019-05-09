@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.tcConfigForm = new System.Windows.Forms.TabControl();
             this.Basic = new System.Windows.Forms.TabPage();
+            this.cbIsEnableJsonBin = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbJsonBinPath = new System.Windows.Forms.TextBox();
             this.tbAlertScanInterval = new System.Windows.Forms.NumericUpDown();
             this.cbIsEnableLog = new System.Windows.Forms.CheckBox();
             this.tbJsonBinSecretKey = new System.Windows.Forms.TextBox();
@@ -75,9 +78,6 @@
             this.tbSearchField = new System.Windows.Forms.TextBox();
             this.periodRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.alertRuleBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tbJsonBinPath = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cbIsEnableJsonBin = new System.Windows.Forms.CheckBox();
             this.tcConfigForm.SuspendLayout();
             this.Basic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbAlertScanInterval)).BeginInit();
@@ -124,6 +124,32 @@
             this.Basic.TabIndex = 0;
             this.Basic.Text = "Basic";
             this.Basic.UseVisualStyleBackColor = true;
+            // 
+            // cbIsEnableJsonBin
+            // 
+            this.cbIsEnableJsonBin.AutoSize = true;
+            this.cbIsEnableJsonBin.Location = new System.Drawing.Point(248, 54);
+            this.cbIsEnableJsonBin.Name = "cbIsEnableJsonBin";
+            this.cbIsEnableJsonBin.Size = new System.Drawing.Size(101, 16);
+            this.cbIsEnableJsonBin.TabIndex = 15;
+            this.cbIsEnableJsonBin.Text = "IsEnableJsonBin";
+            this.cbIsEnableJsonBin.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(246, 142);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 12);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "JsonBin Path：";
+            // 
+            // tbJsonBinPath
+            // 
+            this.tbJsonBinPath.Location = new System.Drawing.Point(248, 161);
+            this.tbJsonBinPath.Name = "tbJsonBinPath";
+            this.tbJsonBinPath.Size = new System.Drawing.Size(182, 22);
+            this.tbJsonBinPath.TabIndex = 13;
             // 
             // tbAlertScanInterval
             // 
@@ -489,9 +515,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(30, 81);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(205, 12);
+            this.label2.Size = new System.Drawing.Size(291, 12);
             this.label2.TabIndex = 3;
-            this.label2.Text = "可搜尋Actitivy或Category，用逗號分隔";
+            this.label2.Text = "可搜尋Actitivy或Category或Chrome的標題，用逗號分隔";
             // 
             // btnSearch
             // 
@@ -527,32 +553,6 @@
             // alertRuleBindingSource
             // 
             this.alertRuleBindingSource.DataSource = typeof(RescueTime_SaveBusyDude.Model.ConfigModel.AlertRule);
-            // 
-            // tbJsonBinPath
-            // 
-            this.tbJsonBinPath.Location = new System.Drawing.Point(248, 161);
-            this.tbJsonBinPath.Name = "tbJsonBinPath";
-            this.tbJsonBinPath.Size = new System.Drawing.Size(182, 22);
-            this.tbJsonBinPath.TabIndex = 13;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(246, 142);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 12);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "JsonBin Path：";
-            // 
-            // cbIsEnableJsonBin
-            // 
-            this.cbIsEnableJsonBin.AutoSize = true;
-            this.cbIsEnableJsonBin.Location = new System.Drawing.Point(248, 54);
-            this.cbIsEnableJsonBin.Name = "cbIsEnableJsonBin";
-            this.cbIsEnableJsonBin.Size = new System.Drawing.Size(101, 16);
-            this.cbIsEnableJsonBin.TabIndex = 15;
-            this.cbIsEnableJsonBin.Text = "IsEnableJsonBin";
-            this.cbIsEnableJsonBin.UseVisualStyleBackColor = true;
             // 
             // ConfigForm
             // 

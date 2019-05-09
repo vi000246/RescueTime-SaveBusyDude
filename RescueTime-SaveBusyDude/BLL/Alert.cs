@@ -69,14 +69,23 @@ namespace RescueTime_SaveBusyDude.BLL
                     break;
                 case EnumModule.AlertType.SpecificActivity:
                     data = data
-                        .Where(x => alertRule.SpecificName.Contains(x.Activity, StringComparer.OrdinalIgnoreCase) &&
+                        .Where(x => (
+                                        alertRule.SpecificName.Contains(x.Activity, StringComparer.OrdinalIgnoreCase) || 
+                                         (x.Activity == "Google Chrome" &&
+                                          alertRule.SpecificName.Any(s => s.Equals(x.Document, StringComparison.OrdinalIgnoreCase))
+                                         )
+                                     ) &&
                                     FilterDataByPeriod(x))
                         .ToList();
                     break;
                 case EnumModule.AlertType.SpecificCategoryOrActivity:
                     data = data
                         .Where(x => (alertRule.SpecificName.Contains(x.Category,StringComparer.OrdinalIgnoreCase)||
-                                     alertRule.SpecificName.Contains(x.Activity, StringComparer.OrdinalIgnoreCase)) &&
+                                     alertRule.SpecificName.Contains(x.Activity, StringComparer.OrdinalIgnoreCase)||
+                                          (x.Activity == "Google Chrome" && 
+                                           alertRule.SpecificName.Any(s => s.Equals(x.Document, StringComparison.OrdinalIgnoreCase))
+                                          )
+                                     ) &&
                                     FilterDataByPeriod(x))
                         .ToList();
                     break;

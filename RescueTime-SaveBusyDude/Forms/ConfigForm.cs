@@ -382,7 +382,8 @@ namespace RescueTime_SaveBusyDude.Forms
             var res = RescueTimeAPI.GetAllActivityData(DateTime.Now.AddMonths(-3),DateTime.Now);
             var result = res.Where(x => 
                 keywords.Any(s => s.Equals(x.Activity, StringComparison.OrdinalIgnoreCase)) ||
-                keywords.Any(s => s.Equals(x.Category, StringComparison.OrdinalIgnoreCase))
+                keywords.Any(s => s.Equals(x.Category, StringComparison.OrdinalIgnoreCase)) ||
+                (x.Activity == "Google Chrome" && keywords.Any(s => s.Equals(x.Document, StringComparison.OrdinalIgnoreCase)))
             );
             var strResult = result.GroupBy(x => x.Category).Select(g => new
             {

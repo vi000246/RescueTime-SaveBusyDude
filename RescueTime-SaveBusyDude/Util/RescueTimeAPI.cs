@@ -30,7 +30,7 @@ namespace RescueTime_SaveBusyDude
         private static string BuildQueryString( 
             EnumModule.perspective perspective = EnumModule.perspective.rank,
             EnumModule.resolution_time resolution_time = EnumModule.resolution_time.hour,
-            EnumModule.restrict_kind restrict_kind = EnumModule.restrict_kind.activity,
+            EnumModule.restrict_kind restrict_kind = EnumModule.restrict_kind.document,
             string restrict_begin = "",string restrict_end = "",string restrict_thing = "",string restrict_thingy = "",
             ConfigModel.JsonConfig config = null)
         {
@@ -78,7 +78,9 @@ namespace RescueTime_SaveBusyDude
 
         private static T GetDataFromApi<T>(string url)
         {
-            var html = new WebClient().DownloadString(url);
+            WebClient client = new WebClient();
+            client.Encoding = Encoding.UTF8;
+            var html = client.DownloadString(url);
             //只取得<body>裡的字串
             var json = GetJsonDataFromHtml(html);
             T response = ConfigUtil.Deserialize<T>(json);
@@ -112,8 +114,9 @@ namespace RescueTime_SaveBusyDude
                     TimeSpent = int.Parse(r[1]),
                     NumberOfPeople = int.Parse(r[2]),
                     Activity = r[3],
-                    Category = r[4],
-                    Productivity = (EnumModule.Productivity)int.Parse(r[5])
+                    Document = r[4],
+                    Category = r[5],
+                    Productivity = (EnumModule.Productivity)int.Parse(r[6])
 
                 });
             }
